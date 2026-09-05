@@ -192,7 +192,7 @@
 </div>
 
 <script>
-// Credentials for your new Firebase project: salary-v01
+// Credentials for your Firebase project: salary-v01
 const firebaseConfig = {
   apiKey: "AIzaSyDWA7TFeiaWWNy6I5fmU8Pd2MJlXkgSBX0",
   authDomain: "salary-v01.firebaseapp.com",
@@ -489,11 +489,16 @@ const db = firebase.database();
       const email = document.getElementById('authEmail').value;
       const pass = document.getElementById('authPass').value;
       if (!email || !pass) return alert('Please enter email and password');
+      
       try {
         await auth.signInWithEmailAndPassword(email, pass);
       } catch (err) {
-        if (err.code === 'auth/user-not-found') {
-          await auth.createUserWithEmailAndPassword(email, pass);
+        if (err.code === 'auth/user-not-found' || err.code === 'auth/invalid-login-credentials') {
+          try {
+            await auth.createUserWithEmailAndPassword(email, pass);
+          } catch (createErr) {
+            alert(createErr.message);
+          }
         } else {
           alert(err.message);
         }
