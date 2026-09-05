@@ -60,6 +60,521 @@
   }
   .auth-card h2 { font-family: var(--serif); font-size: 22px; margin: 0 0 8px; }
   .auth-card p { font-size: 13.5px; color: var(--text-lo); margin-bottom: 20px; line-height: 1.4; }
+  .auth-btn-google {
+    width: 100%; padding: 13px; border-radius: 10px; border: 1px solid var(--line);
+    background: var(--brass); color: var(--ink); font-weight: 700; font-size: 14.5px; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px; margin-bottom: 10px;
+  }
+  .auth-btn-guest {
+    width: 100%; padding: 12px; border-radius: 10px; border: 1px solid var(--line);
+    background: var(--ink); color: var(--text-hi); font-weight: 600; font-size: 14px; cursor: pointer;
+  }
+
+  /* Tabs */
+  .tabs {
+    display: flex; background: var(--ink-2); border: 1px solid var(--line);
+    border-radius: 14px; padding: 4px; margin-bottom: 16px;
+  }
+  .tabs button {
+    flex: 1; padding: 10px 0; border: none; border-radius: 10px; background: none;
+    color: var(--text-lo); font-family: var(--sans); font-weight: 600; font-size: 14px; cursor: pointer;
+  }
+  .tabs button.active { background: var(--brass); color: var(--ink); }
+
+  /* Month switcher */
+  .month-bar {
+    display: flex; align-items: center; justify-content: space-between;
+    background: var(--ink-2); border: 1px solid var(--line); border-radius: 14px;
+    padding: 10px 8px; margin-bottom: 16px;
+  }
+  .month-bar button {
+    background: none; border: none; color: var(--text-hi); font-size: 20px;
+    width: 40px; height: 40px; border-radius: 10px; cursor: pointer;
+  }
+  .month-bar button:active { background: var(--line); }
+  .month-label { font-family: var(--serif); font-size: 17px; font-weight: 600; }
+
+  /* Hero card */
+  .hero {
+    background: linear-gradient(155deg, #1E2733, var(--ink-2));
+    border: 1px solid var(--line); border-radius: 20px; padding: 26px 22px;
+    margin-bottom: 16px; position: relative; overflow: hidden;
+  }
+  .hero::after {
+    content: ''; position: absolute; right: -40px; top: -40px; width: 140px; height: 140px;
+    border-radius: 50%; background: radial-gradient(circle, rgba(176,141,87,0.18), transparent 70%);
+  }
+  .hero .label { font-size: 13px; color: var(--text-lo); margin-bottom: 6px; }
+  .hero .amount { font-family: var(--serif); font-size: 42px; font-weight: 700; color: var(--brass-bright); line-height: 1.1; }
+  .hero .sub { font-size: 13px; color: var(--text-lo); margin-top: 10px; display: flex; gap: 16px; flex-wrap: wrap; }
+  .hero .sub span b { color: var(--text-hi); font-weight: 600; }
+
+  /* Section cards */
+  .card { background: var(--ink-2); border: 1px solid var(--line); border-radius: 16px; padding: 16px; margin-bottom: 14px; }
+  .card h2 { font-family: var(--serif); font-weight: 600; font-size: 16px; margin: 0 0 12px; display: flex; align-items: center; justify-content: space-between; }
+  .card h2 .add-btn { font-family: var(--sans); font-size: 13px; color: var(--brass-bright); background: none; border: none; cursor: pointer; padding: 4px 8px; }
+
+  .row { display: flex; align-items: center; gap: 10px; padding: 8px 0; border-bottom: 1px solid var(--line); }
+  .row:last-child { border-bottom: none; }
+  .row input[type="text"] { flex: 1; background: none; border: none; color: var(--text-hi); font-family: var(--sans); font-size: 14.5px; padding: 6px 0; min-width: 0; }
+  .row input[type="text"]::placeholder { color: var(--text-lo); }
+  .row .amt-wrap { display: flex; align-items: center; gap: 2px; flex-shrink: 0; }
+  .row .amt-wrap span { color: var(--text-lo); font-size: 14px; }
+  .row input[type="number"] { width: 88px; background: none; border: none; color: var(--text-hi); font-family: var(--sans); font-size: 14.5px; text-align: right; padding: 6px 0; }
+  .row input[type="number"]::-webkit-outer-spin-button, .row input[type="number"]::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+  .row .del { background: none; border: none; color: var(--text-lo); font-size: 17px; width: 26px; height: 26px; cursor: pointer; flex-shrink: 0; }
+  .row .del:active { color: var(--rust); }
+
+  .card .total-row { display: flex; justify-content: space-between; padding-top: 12px; margin-top: 4px; font-weight: 600; font-size: 15px; }
+  .card.deductions .total-row .val { color: var(--rust); }
+  .card.earnings .total-row .val { color: var(--green); }
+  .card.spending .total-row .val { color: var(--rust); }
+
+  /* Save button */
+  .save-btn { width: 100%; padding: 15px; border-radius: 14px; border: none; background: var(--brass); color: var(--ink); font-family: var(--sans); font-weight: 700; font-size: 15px; cursor: pointer; margin-top: 4px; }
+  .save-btn:active { background: var(--brass-bright); }
+  .save-msg { text-align: center; font-size: 13px; color: var(--green); height: 18px; margin-top: 8px; opacity: 0; transition: opacity 0.3s; }
+  .save-msg.show { opacity: 1; }
+
+  /* Expense entry form */
+  .expense-form { display: flex; gap: 8px; margin-bottom: 12px; align-items: center; }
+  .expense-form .day-input { width: 48px; background: var(--ink); border: 1px solid var(--line); border-radius: 8px; color: var(--text-hi); font-size: 14px; text-align: center; padding: 8px 4px; }
+  .expense-form .note-input { flex: 1; background: var(--ink); border: 1px solid var(--line); border-radius: 8px; color: var(--text-hi); font-size: 14px; padding: 8px 10px; min-width: 0; }
+  .expense-form .amt-input { width: 78px; background: var(--ink); border: 1px solid var(--line); border-radius: 8px; color: var(--text-hi); font-size: 14px; text-align: right; padding: 8px 8px; }
+  .expense-form input::placeholder { color: var(--text-lo); }
+  .expense-form .add-expense-btn { background: var(--brass); border: none; color: var(--ink); border-radius: 8px; width: 38px; height: 38px; font-size: 18px; font-weight: 700; cursor: pointer; flex-shrink: 0; }
+
+  .expense-row { display: flex; align-items: center; gap: 10px; padding: 10px 0; border-bottom: 1px solid var(--line); }
+  .expense-row:last-child { border-bottom: none; }
+  .expense-row .day-badge { width: 34px; height: 34px; border-radius: 9px; background: var(--ink); display: flex; align-items: center; justify-content: center; font-family: var(--serif); font-size: 13px; color: var(--text-lo); flex-shrink: 0; }
+  .expense-row .note { flex: 1; font-size: 14px; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .expense-row .amt { font-size: 14.5px; font-weight: 600; color: var(--rust); flex-shrink: 0; }
+  .expense-row .del { background: none; border: none; color: var(--text-lo); font-size: 16px; cursor: pointer; flex-shrink: 0; width: 24px; }
+
+  /* History */
+  .history-item { display: flex; justify-content: space-between; align-items: center; padding: 12px 4px; border-bottom: 1px solid var(--line); cursor: pointer; }
+  .history-item:last-child { border-bottom: none; }
+  .history-item .h-left .h-month { font-size: 14.5px; font-weight: 500; }
+  .history-item .h-left .h-sub { font-size: 12px; color: var(--text-lo); margin-top: 2px; }
+  .history-item .h-net { font-family: var(--serif); font-size: 16px; font-weight: 600; color: var(--brass-bright); }
+  .empty-state { color: var(--text-lo); font-size: 13.5px; padding: 6px 4px 2px; line-height: 1.5; }
+
+  .loading { text-align: center; color: var(--text-lo); padding: 40px 0; font-size: 14px; }
+</style>
+
+<!-- Firebase SDKs -->
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
+</head>
+<body>
+<div id="app">
+  <div class="header">
+    <div class="eyebrow">
+      <span>Salary Ledger</span>
+      <span id="syncBadge" style="font-size: 11px; color: var(--green); display: none;">● Connected</span>
+    </div>
+    <h1>Your pay, tracked</h1>
+  </div>
+  
+  <div id="userBar" class="user-bar" style="display: none;">
+    <div class="user-info">
+      <div id="userAvatar" class="user-avatar">U</div>
+      <div id="userEmail" class="user-email">user@email.com</div>
+    </div>
+    <button class="logout-btn" onclick="__salaryApp.logout()">Sign out</button>
+  </div>
+
+  <div id="content" class="loading">Initializing app…</div>
+</div>
+
+<script>
+// Credentials for your Firebase project: salary-v01
+const firebaseConfig = {
+  apiKey: "AIzaSyDWA7TFeiaWWNy6I5fmU8Pd2MJlXkgSBX0",
+  authDomain: "salary-v01.firebaseapp.com",
+  databaseURL: "https://salary-v01-default-rtdb.firebaseio.com",
+  projectId: "salary-v01",
+  storageBucket: "salary-v01.firebasestorage.app",
+  messagingSenderId: "850709546111",
+  appId: "1:850709546111:web:dc412616cd42b934332b4a"
+};
+
+firebase.initializeApp(firebaseConfig);
+const auth = firebase.auth();
+const db = firebase.database();
+
+(function() {
+  const MONTHS = ["January","February","March","April","May","June","July","August","September","October","November","December"];
+
+  let currentUser = null;
+  let view = 'salary';
+  let state = {
+    year: new Date().getFullYear(),
+    month: new Date().getMonth(),
+    earnings: [{ name: "Basic pay", amount: 0 }],
+    deductions: [],
+    expenses: []
+  };
+  let history = [];
+  let monthListener = null;
+  let historyListener = null;
+
+  function monthPath(uid, year, month) {
+    return `users/${uid}/ledger/${year}-${String(month+1).padStart(2,'0')}`;
+  }
+
+  function fmt(n) {
+    const v = Number(n) || 0;
+    return v.toLocaleString(undefined, { maximumFractionDigits: 2 });
+  }
+  function sum(arr) { return arr ? arr.reduce((a,b) => a + (Number(b.amount) || 0), 0) : 0; }
+  function daysInMonth(year, month) { return new Date(year, month + 1, 0).getDate(); }
+
+  // Observe Firebase Auth state changes
+  auth.onAuthStateChanged((user) => {
+    currentUser = user;
+    if (user) {
+      document.getElementById('userBar').style.display = 'flex';
+      document.getElementById('syncBadge').style.display = 'inline';
+      
+      if (user.isAnonymous) {
+        document.getElementById('userEmail').textContent = 'Guest User (Local Device)';
+        document.getElementById('userAvatar').textContent = 'G';
+      } else {
+        document.getElementById('userEmail').textContent = user.email || 'Google User';
+        document.getElementById('userAvatar').textContent = (user.email || 'U').charAt(0).toUpperCase();
+      }
+
+      listenToMonth(state.year, state.month);
+      listenToHistory();
+    } else {
+      document.getElementById('userBar').style.display = 'none';
+      document.getElementById('syncBadge').style.display = 'none';
+      if (monthListener) monthListener.off();
+      if (historyListener) historyListener.off();
+      renderAuthScreen();
+    }
+  });
+
+  function listenToMonth(year, month) {
+    if (!currentUser) return;
+    if (monthListener) monthListener.off();
+
+    const path = monthPath(currentUser.uid, year, month);
+    monthListener = db.ref(path);
+
+    monthListener.on('value', (snapshot) => {
+      const data = snapshot.val();
+      if (data) {
+        state.earnings = data.earnings || [{ name: "Basic pay", amount: 0 }];
+        state.deductions = data.deductions || [];
+        state.expenses = (data.expenses || []).sort((a,b) => a.day - b.day);
+      } else {
+        state.earnings = [{ name: "Basic pay", amount: 0 }];
+        state.deductions = [];
+        state.expenses = [];
+      }
+      render();
+    });
+  }
+
+  function listenToHistory() {
+    if (!currentUser) return;
+    if (historyListener) historyListener.off();
+
+    historyListener = db.ref(`users/${currentUser.uid}/ledger`);
+    historyListener.on('value', (snapshot) => {
+      const data = snapshot.val() || {};
+      const items = [];
+
+      Object.keys(data).forEach((key) => {
+        const [y, m] = key.split('-').map(Number);
+        const monthData = data[key];
+        const gross = sum(monthData.earnings);
+        const ded = sum(monthData.deductions);
+        const spent = sum(monthData.expenses);
+
+        items.push({
+          key, year: y, month: m - 1, gross, ded, spent, net: gross - ded
+        });
+      });
+
+      items.sort((a,b) => (b.year - a.year) || (b.month - a.month));
+      history = items;
+      render();
+    });
+  }
+
+  function saveSalary() {
+    if (!currentUser) return;
+    const path = monthPath(currentUser.uid, state.year, state.month);
+    db.ref(path).update({
+      year: state.year,
+      month: state.month,
+      earnings: state.earnings,
+      deductions: state.deductions
+    });
+    flashMsg();
+  }
+
+  function saveExpenses() {
+    if (!currentUser) return;
+    const path = monthPath(currentUser.uid, state.year, state.month);
+    db.ref(path).update({
+      year: state.year,
+      month: state.month,
+      expenses: state.expenses
+    });
+  }
+
+  function flashMsg() {
+    const msg = document.getElementById('saveMsg');
+    if (msg) {
+      msg.classList.add('show');
+      setTimeout(() => msg.classList.remove('show'), 1800);
+    }
+  }
+
+  function renderAuthScreen() {
+    document.getElementById('content').innerHTML = `
+      <div class="auth-card">
+        <h2>Welcome to Salary Ledger</h2>
+        <p>Sign in with Google to sync across devices, or use Guest Mode for local device storage.</p>
+        <button class="auth-btn-google" onclick="__salaryApp.loginWithGoogle()">
+          <svg width="18" height="18" viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z"/></svg>
+          Continue with Google
+        </button>
+        <button class="auth-btn-guest" onclick="__salaryApp.loginGuest()">
+          Continue as Guest (Local Only)
+        </button>
+      </div>
+    `;
+  }
+
+  function renderSalaryView() {
+    const gross = sum(state.earnings);
+    const ded = sum(state.deductions);
+    const net = gross - ded;
+    return `
+      <div class="hero">
+        <div class="label" id="heroLabel">Net pay this month</div>
+        <div class="amount">Rs <span id="netAmount">${fmt(net)}</span></div>
+        <div class="sub">
+          <span>Gross <b id="grossVal">${fmt(gross)}</b></span>
+          <span>Deductions <b id="dedVal">${fmt(ded)}</b></span>
+        </div>
+      </div>
+
+      <div class="card earnings">
+        <h2>Earnings <button class="add-btn" onclick="__salaryApp.add('earnings')">+ Add line</button></h2>
+        <div id="earningsRows">${rowsHtml('earnings')}</div>
+        <div class="total-row"><span>Total earnings</span><span class="val">Rs <span id="earnTotal">${fmt(gross)}</span></span></div>
+      </div>
+
+      <div class="card deductions">
+        <h2>Deductions <button class="add-btn" onclick="__salaryApp.add('deductions')">+ Add line</button></h2>
+        <div id="deductionsRows">${rowsHtml('deductions')}</div>
+        <div class="total-row"><span>Total deductions</span><span class="val">Rs <span id="dedTotal">${fmt(ded)}</span></span></div>
+      </div>
+
+      <button class="save-btn" onclick="__salaryApp.save()">Save ${MONTHS[state.month]} ${state.year}</button>
+      <div class="save-msg" id="saveMsg">Saved securely to cloud</div>
+    `;
+  }
+
+  function renderSpendingView() {
+    const gross = sum(state.earnings);
+    const ded = sum(state.deductions);
+    const net = gross - ded;
+    const spent = sum(state.expenses);
+    const remaining = net - spent;
+    return `
+      <div class="hero">
+        <div class="label" id="heroLabel">Remaining after spending</div>
+        <div class="amount">Rs <span id="netAmount">${fmt(remaining)}</span></div>
+        <div class="sub">
+          <span>Net pay <b id="grossVal">${fmt(net)}</b></span>
+          <span>Spent so far <b id="dedVal">${fmt(spent)}</b></span>
+        </div>
+      </div>
+
+      <div class="card spending">
+        <h2>Add an expense</h2>
+        <div class="expense-form">
+          <input type="number" class="day-input" id="expDay" min="1" max="${daysInMonth(state.year, state.month)}" value="${todayDefaultDay()}" placeholder="Day">
+          <input type="text" class="note-input" id="expNote" placeholder="What did you spend on?">
+          <input type="number" class="amt-input" id="expAmt" placeholder="Rs">
+          <button class="add-expense-btn" onclick="__salaryApp.addExpense()" aria-label="Add expense">+</button>
+        </div>
+      </div>
+
+      <div class="card spending">
+        <h2>${MONTHS[state.month]} spending</h2>
+        <div id="expenseRows">${expenseRowsHtml()}</div>
+        <div class="total-row"><span>Total spent</span><span class="val">Rs <span id="spentTotal">${fmt(spent)}</span></span></div>
+      </div>
+      <div class="save-msg show" style="color: var(--text-lo);" id="remainingNote">Rs <span id="remainingVal">${fmt(remaining)}</span> left of this month's net pay</div>
+    `;
+  }
+
+  function rowsHtml(type) {
+    return state[type].map((item, idx) => `
+      <div class="row">
+        <input type="text" placeholder="${type === 'earnings' ? 'e.g. Basic salary' : 'e.g. Provident fund'}"
+          value="${(item.name || '').replace(/"/g,'&quot;')}"
+          oninput="__salaryApp.setName('${type}', ${idx}, this.value)">
+        <div class="amt-wrap">
+          <span>Rs</span>
+          <input type="number" inputmode="decimal" value="${item.amount || ''}" placeholder="0"
+            oninput="__salaryApp.setAmount('${type}', ${idx}, this.value)">
+        </div>
+        <button class="del" onclick="__salaryApp.remove('${type}', ${idx})" aria-label="Remove">✕</button>
+      </div>
+    `).join('');
+  }
+
+  function expenseRowsHtml() {
+    if (!state.expenses.length) return `<div class="empty-state">No spending logged for ${MONTHS[state.month]}.</div>`;
+    return state.expenses.map((item) => `
+      <div class="expense-row">
+        <div class="day-badge">${item.day}</div>
+        <div class="note">${(item.note || 'Expense').replace(/</g,'&lt;')}</div>
+        <div class="amt">Rs ${fmt(item.amount)}</div>
+        <button class="del" onclick="__salaryApp.removeExpense('${item.id}')" aria-label="Remove">✕</button>
+      </div>
+    `).join('');
+  }
+
+  function historyHtml() {
+    if (!history.length) return `<div class="empty-state">No saved months yet.</div>`;
+    return history.map(h => `
+      <div class="history-item" onclick="__salaryApp.goTo(${h.year}, ${h.month})">
+        <div class="h-left">
+          <div class="h-month">${MONTHS[h.month]} ${h.year}</div>
+          <div class="h-sub">Gross Rs ${fmt(h.gross)} · Spent Rs ${fmt(h.spent)}</div>
+        </div>
+        <div class="h-net">Rs ${fmt(h.net - h.spent)}</div>
+      </div>
+    `).join('');
+  }
+
+  function todayDefaultDay() {
+    const now = new Date();
+    if (now.getFullYear() === state.year && now.getMonth() === state.month) return now.getDate();
+    return 1;
+  }
+
+  function render() {
+    if (!currentUser) return;
+    document.getElementById('content').innerHTML = `
+      <div class="tabs">
+        <button class="${view === 'salary' ? 'active' : ''}" onclick="__salaryApp.setView('salary')">Salary</button>
+        <button class="${view === 'spending' ? 'active' : ''}" onclick="__salaryApp.setView('spending')">Daily spending</button>
+      </div>
+
+      <div class="month-bar">
+        <button onclick="__salaryApp.shiftMonth(-1)">‹</button>
+        <div class="month-label">${MONTHS[state.month]} ${state.year}</div>
+        <button onclick="__salaryApp.shiftMonth(1)">›</button>
+      </div>
+
+      ${view === 'salary' ? renderSalaryView() : renderSpendingView()}
+
+      <div class="card" style="margin-top: 22px;">
+        <h2>History</h2>
+        <div id="historyList">${historyHtml()}</div>
+      </div>
+    `;
+  }
+
+  window.__salaryApp = {
+    async loginWithGoogle() {
+      const provider = new firebase.auth.GoogleAuthProvider();
+      try {
+        await auth.signInWithPopup(provider);
+      } catch (err) {
+        alert(err.message);
+      }
+    },
+    async loginGuest() {
+      try {
+        await auth.signInAnonymously();
+      } catch (err) {
+        alert("Guest login failed: " + err.message);
+      }
+    },
+    logout() { auth.signOut(); },
+    setName(type, idx, val) { state[type][idx].name = val; },
+    setAmount(type, idx, val) { state[type][idx].amount = val === '' ? 0 : parseFloat(val); },
+    add(type) { state[type].push({ name: "", amount: 0 }); render(); },
+    remove(type, idx) { state[type].splice(idx, 1); render(); },
+    save() { saveSalary(); },
+    setView(v) { view = v; render(); },
+    addExpense() {
+      const dayEl = document.getElementById('expDay');
+      const noteEl = document.getElementById('expNote');
+      const amtEl = document.getElementById('expAmt');
+      const day = Math.min(Math.max(parseInt(dayEl.value) || todayDefaultDay(), 1), daysInMonth(state.year, state.month));
+      const note = noteEl.value.trim();
+      const amount = parseFloat(amtEl.value) || 0;
+      if (amount <= 0) return;
+      state.expenses.push({ id: Date.now() + '-' + Math.random().toString(36).slice(2,7), day, note, amount });
+      state.expenses.sort((a,b) => a.day - b.day);
+      saveExpenses();
+    },
+    removeExpense(id) {
+      state.expenses = state.expenses.filter(e => e.id !== id);
+      saveExpenses();
+    },
+    shiftMonth(dir) {
+      let m = state.month + dir, y = state.year;
+      if (m < 0) { m = 11; y -= 1; }
+      if (m > 11) { m = 0; y += 1; }
+      state.month = m; state.year = y;
+      listenToMonth(y, m);
+    },
+    goTo(year, month) {
+      state.year = year; state.month = month;
+      listenToMonth(year, month);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  };
+})();
+
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('sw.js').catch(() => {});
+  });
+}
+</script>
+</body>
+</html>
+  }
+  #app { max-width: 480px; margin: 0 auto; padding: 20px 18px 60px; }
+
+  /* Header & User Bar */
+  .header { padding: 8px 2px 18px; }
+  .header .eyebrow { font-size: 13px; color: var(--brass-bright); letter-spacing: 0.02em; display: flex; justify-content: space-between; align-items: center; }
+  .header h1 { font-family: var(--serif); font-weight: 600; font-size: 28px; margin: 4px 0 0; }
+  
+  .user-bar {
+    display: flex; align-items: center; justify-content: space-between;
+    background: var(--ink-2); border: 1px solid var(--line); border-radius: 12px;
+    padding: 8px 12px; margin-bottom: 16px; font-size: 13px;
+  }
+  .user-info { display: flex; align-items: center; gap: 8px; overflow: hidden; }
+  .user-avatar { width: 26px; height: 26px; border-radius: 50%; background: var(--brass); color: var(--ink); display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 12px; flex-shrink: 0; }
+  .user-email { color: var(--text-hi); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .logout-btn { background: none; border: 1px solid var(--line); color: var(--text-lo); padding: 4px 8px; border-radius: 6px; font-size: 11px; cursor: pointer; }
+  .logout-btn:active { color: var(--rust); border-color: var(--rust); }
+
+  /* Auth Screen Card */
+  .auth-card {
+    background: var(--ink-2); border: 1px solid var(--line); border-radius: 20px;
+    padding: 24px; text-align: center; margin-top: 20px;
+  }
+  .auth-card h2 { font-family: var(--serif); font-size: 22px; margin: 0 0 8px; }
+  .auth-card p { font-size: 13.5px; color: var(--text-lo); margin-bottom: 20px; line-height: 1.4; }
   .auth-input {
     width: 100%; padding: 12px; margin-bottom: 10px; background: var(--ink);
     border: 1px solid var(--line); border-radius: 10px; color: var(--text-hi); font-size: 14px;
