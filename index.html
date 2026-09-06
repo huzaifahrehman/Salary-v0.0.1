@@ -36,6 +36,7 @@
  min-height: 100vh;
  }
  #app { max-width: 480px; margin: 0 auto; padding: 20px 18px 60px; }
+ [dir="rtl"] .row .del, [dir="rtl"] .expense-row .del { margin-left: 0; }
  /* Header & User Bar */
  .header { padding: 8px 2px 18px; }
  .header .eyebrow { font-size: 13px; color: var(--brass-bright); letter-spacing: 0.02em; display: flex; justify-content: space-between; align-items: center; }
@@ -49,6 +50,9 @@
  .user-info { display: flex; align-items: center; gap: 8px; overflow: hidden; }
  .user-avatar { width: 26px; height: 26px; border-radius: 50%; background: var(--brass); color: var(--ink); display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 12px; flex-shrink: 0; }
  .user-email { color: var(--text-hi); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+ .user-actions { display: flex; align-items: center; gap: 6px; flex-shrink: 0; }
+ .icon-btn { background: none; border: 1px solid var(--line); color: var(--text-lo); padding: 4px 8px; border-radius: 6px; font-size: 11px; cursor: pointer; }
+ .icon-btn:active { color: var(--brass-bright); border-color: var(--brass-bright); }
  .logout-btn { background: none; border: 1px solid var(--line); color: var(--text-lo); padding: 4px 8px; border-radius: 6px; font-size: 11px; cursor: pointer; }
  .logout-btn:active { color: var(--rust); border-color: var(--rust); }
  /* Auth Screen Card */
@@ -59,21 +63,27 @@
  .auth-card h2 { font-family: var(--serif); font-size: 22px; margin: 0 0 8px; }
  .auth-card p { font-size: 13.5px; color: var(--text-lo); margin-bottom: 20px; line-height: 1.4; }
 
+ .auth-prefs { display: flex; gap: 8px; margin-bottom: 16px; }
+ .auth-prefs select { flex: 1; background: var(--ink); border: 1px solid var(--line); border-radius: 10px; color: var(--text-hi); font-family: var(--sans); font-size: 12.5px; padding: 8px 6px; }
+
  /* Auth mode tabs (Sign in / Create account) */
  .auth-tabs { display: flex; background: var(--ink); border: 1px solid var(--line); border-radius: 12px; padding: 4px; margin-bottom: 18px; }
  .auth-tabs button { flex: 1; padding: 9px 0; border: none; border-radius: 8px; background: none; color: var(--text-lo); font-family: var(--sans); font-weight: 600; font-size: 13.5px; cursor: pointer; }
  .auth-tabs button.active { background: var(--brass); color: var(--ink); }
 
  .auth-field { text-align: left; margin-bottom: 12px; }
+ [dir="rtl"] .auth-field { text-align: right; }
  .auth-field label { display: block; font-size: 12px; color: var(--text-lo); margin-bottom: 5px; }
- .auth-field input { width: 100%; background: var(--ink); border: 1px solid var(--line); border-radius: 10px; color: var(--text-hi); font-family: var(--sans); font-size: 14.5px; padding: 11px 12px; }
+ .auth-field input, .auth-field select { width: 100%; background: var(--ink); border: 1px solid var(--line); border-radius: 10px; color: var(--text-hi); font-family: var(--sans); font-size: 14.5px; padding: 11px 12px; }
  .auth-field input::placeholder { color: var(--text-lo); }
- .auth-field input:focus { outline: none; border-color: var(--brass); }
+ .auth-field input:focus, .auth-field select:focus { outline: none; border-color: var(--brass); }
 
  .auth-error { background: rgba(177,90,71,0.12); border: 1px solid rgba(177,90,71,0.4); color: #E8A79A; font-size: 12.5px; border-radius: 10px; padding: 9px 11px; margin-bottom: 12px; text-align: left; display: none; line-height: 1.4; }
+ [dir="rtl"] .auth-error { text-align: right; }
  .auth-error.show { display: block; }
 
  .auth-success { background: rgba(92,138,110,0.12); border: 1px solid rgba(92,138,110,0.4); color: #A9CBB4; font-size: 12.5px; border-radius: 10px; padding: 9px 11px; margin-bottom: 12px; text-align: left; display: none; line-height: 1.4; }
+ [dir="rtl"] .auth-success { text-align: right; }
  .auth-success.show { display: block; }
 
  .auth-btn-primary {
@@ -130,6 +140,7 @@
  content: ''; position: absolute; right: -40px; top: -40px; width: 140px; height: 140px;
  border-radius: 50%; background: radial-gradient(circle, rgba(176,141,87,0.18), transparent 70%);
  }
+ [dir="rtl"] .hero::after { right: auto; left: -40px; }
  .hero .label { font-size: 13px; color: var(--text-lo); margin-bottom: 6px; }
  .hero .amount { font-family: var(--serif); font-size: 42px; font-weight: 700; color: var(--brass-bright); line-height: 1.1; }
  .hero .sub { font-size: 13px; color: var(--text-lo); margin-top: 10px; display: flex; gap: 16px; flex-wrap: wrap; }
@@ -178,6 +189,13 @@
  .history-item .h-net { font-family: var(--serif); font-size: 16px; font-weight: 600; color: var(--brass-bright); }
  .empty-state { color: var(--text-lo); font-size: 13.5px; padding: 6px 4px 2px; line-height: 1.5; }
  .loading { text-align: center; color: var(--text-lo); padding: 40px 0; font-size: 14px; }
+
+ /* Settings modal */
+ .settings-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.6); display: none; align-items: center; justify-content: center; z-index: 50; padding: 20px; }
+ .settings-overlay.open { display: flex; }
+ .settings-card { background: var(--ink-2); border: 1px solid var(--line); border-radius: 20px; padding: 22px; width: 100%; max-width: 340px; text-align: left; }
+ [dir="rtl"] .settings-card { text-align: right; }
+ .settings-card h2 { font-family: var(--serif); font-size: 19px; margin: 0 0 16px; }
 </style>
 <!-- Firebase SDKs (compat build — required because this app uses the global `firebase` object) -->
 <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js" onerror="window.__fbLoadFailed=true"></script>
@@ -188,10 +206,10 @@
 <div id="app">
  <div class="header">
  <div class="eyebrow">
- <span>Salary Ledger</span>
+ <span id="eyebrowText">Salary Ledger</span>
  <span id="syncBadge" style="font-size: 11px; color: var(--green); display: none;">● Connected</span>
  </div>
- <h1>Your pay, tracked</h1>
+ <h1 id="titleText">Your pay, tracked</h1>
  </div>
 
  <div id="userBar" class="user-bar" style="display: none;">
@@ -199,9 +217,13 @@
  <div id="userAvatar" class="user-avatar">U</div>
  <div id="userEmail" class="user-email">user@email.com</div>
  </div>
- <button class="logout-btn" onclick="__salaryApp.logout()">Sign out</button>
+ <div class="user-actions">
+ <button class="icon-btn" onclick="__salaryApp.toggleSettings()">⚙</button>
+ <button class="logout-btn" id="signOutBtn" onclick="__salaryApp.logout()">Sign out</button>
+ </div>
  </div>
  <div id="content" class="loading">Initializing app…</div>
+ <div class="settings-overlay" id="settingsOverlay"></div>
 </div>
 <script>
 // Credentials for your Firebase project: salary-v01
@@ -214,6 +236,7 @@ const firebaseConfig = {
  messagingSenderId: "850709546111",
  appId: "1:850709546111:web:dc412616cd42b934332b4a"
 };
+
 // Guard: if the SDK scripts above failed to load (blocked network, ad blocker,
 // offline CDN, or a stray <script type="module"> import elsewhere on the page
 // that shadows the global), `firebase` will be undefined. Fail loudly with a
@@ -241,28 +264,128 @@ if (typeof firebase === 'undefined' || window.__fbLoadFailed) {
 firebase.initializeApp(firebaseConfig);
 const auth = firebase.auth();
 const db = firebase.database();
+
 (function() {
+ // ---------- i18n ----------
+ const LANG_META = {
+ en: { name: "English", rtl: false },
+ ur: { name: "اردو", rtl: true },
+ ar: { name: "العربية", rtl: true },
+ hi: { name: "हिन्दी", rtl: false },
+ es: { name: "Español", rtl: false },
+ fr: { name: "Français", rtl: false },
+ de: { name: "Deutsch", rtl: false },
+ pt: { name: "Português", rtl: false },
+ ru: { name: "Русский", rtl: false },
+ zh: { name: "中文", rtl: false },
+ tr: { name: "Türkçe", rtl: false },
+ fa: { name: "فارسی", rtl: true },
+ bn: { name: "বাংলা", rtl: false },
+ id: { name: "Bahasa Indonesia", rtl: false },
+ it: { name: "Italiano", rtl: false },
+ ja: { name: "日本語", rtl: false },
+ ko: { name: "한국어", rtl: false }
+ };
+
+ const I18N = {
+ en: { appEyebrow:"Salary Ledger", appTitle:"Your pay, tracked", connected:"Connected", signOut:"Sign out", settingsBtn:"Settings", languageLabel:"Language", currencyLabel:"Currency", done:"Done", welcomeTitle:"Welcome to Salary Ledger", welcomeDesc:"Sign in to sync across devices, or use Guest Mode for local device storage.", signIn:"Sign In", createAccount:"Create Account", emailLabel:"Email", passwordLabel:"Password", passwordSignupPh:"At least 6 characters", passwordSigninPh:"Your password", forgotPassword:"Forgot password?", orDivider:"or", continueGoogle:"Continue with Google", continueGuest:"Continue as Guest (Local Only)", tabSalary:"Salary", tabSpending:"Daily spending", netPayMonth:"Net pay this month", grossLabel:"Gross", deductionsLabel:"Deductions", earningsLabel:"Earnings", addLine:"+ Add line", totalEarnings:"Total earnings", totalDeductions:"Total deductions", saveBtn:"Save", savedMsg:"Saved securely to cloud", remainingAfterSpending:"Remaining after spending", netPayShort:"Net pay", spentSoFar:"Spent so far", addExpenseTitle:"Add an expense", whatSpentOn:"What did you spend on?", totalSpent:"Total spent", leftOfNetPay:"left of this month's net pay", historyLabel:"History", noSavedMonths:"No saved months yet.", noSpendingLogged:"No spending logged for", basicPay:"Basic pay", placeholderEarning:"e.g. Basic salary", placeholderDeduction:"e.g. Provident fund" },
+ ur: { appEyebrow:"سیلری لیجر", appTitle:"آپ کی آمدنی، ٹریک میں", connected:"منسلک", signOut:"سائن آؤٹ", settingsBtn:"ترتیبات", languageLabel:"زبان", currencyLabel:"کرنسی", done:"مکمل", welcomeTitle:"سیلری لیجر میں خوش آمدید", welcomeDesc:"ڈیوائسز پر سنک کرنے کے لیے سائن ان کریں، یا مقامی محفوظ کے لیے مہمان موڈ استعمال کریں۔", signIn:"سائن ان", createAccount:"اکاؤنٹ بنائیں", emailLabel:"ای میل", passwordLabel:"پاس ورڈ", passwordSignupPh:"کم از کم 6 حروف", passwordSigninPh:"آپ کا پاس ورڈ", forgotPassword:"پاس ورڈ بھول گئے؟", orDivider:"یا", continueGoogle:"گوگل کے ساتھ جاری رکھیں", continueGuest:"مہمان کے طور پر جاری رکھیں (صرف مقامی)", tabSalary:"تنخواہ", tabSpending:"روزانہ اخراجات", netPayMonth:"اس ماہ کی خالص تنخواہ", grossLabel:"مجموعی", deductionsLabel:"کٹوتیاں", earningsLabel:"آمدنی", addLine:"+ لائن شامل کریں", totalEarnings:"کل آمدنی", totalDeductions:"کل کٹوتیاں", saveBtn:"محفوظ کریں", savedMsg:"محفوظ طریقے سے کلاؤڈ میں محفوظ ہو گیا", remainingAfterSpending:"خرچ کے بعد باقی", netPayShort:"خالص تنخواہ", spentSoFar:"اب تک خرچ", addExpenseTitle:"خرچ شامل کریں", whatSpentOn:"کس چیز پر خرچ کیا؟", totalSpent:"کل خرچ", leftOfNetPay:"اس ماہ کی خالص تنخواہ میں سے باقی", historyLabel:"ماضی کا ریکارڈ", noSavedMonths:"ابھی تک کوئی مہینہ محفوظ نہیں۔", noSpendingLogged:"کے لیے کوئی خرچ درج نہیں", basicPay:"بنیادی تنخواہ", placeholderEarning:"مثلاً بنیادی تنخواہ", placeholderDeduction:"مثلاً پراویڈنٹ فنڈ" },
+ ar: { appEyebrow:"دفتر الرواتب", appTitle:"راتبك، بدقة", connected:"متصل", signOut:"تسجيل الخروج", settingsBtn:"الإعدادات", languageLabel:"اللغة", currencyLabel:"العملة", done:"تم", welcomeTitle:"مرحبًا بك في دفتر الرواتب", welcomeDesc:"سجّل الدخول للمزامنة عبر الأجهزة، أو استخدم وضع الضيف للتخزين المحلي.", signIn:"تسجيل الدخول", createAccount:"إنشاء حساب", emailLabel:"البريد الإلكتروني", passwordLabel:"كلمة المرور", passwordSignupPh:"6 أحرف على الأقل", passwordSigninPh:"كلمة المرور الخاصة بك", forgotPassword:"نسيت كلمة المرور؟", orDivider:"أو", continueGoogle:"المتابعة باستخدام جوجل", continueGuest:"المتابعة كضيف (محليًا فقط)", tabSalary:"الراتب", tabSpending:"الإنفاق اليومي", netPayMonth:"صافي الراتب هذا الشهر", grossLabel:"الإجمالي", deductionsLabel:"الخصومات", earningsLabel:"الإيرادات", addLine:"+ إضافة بند", totalEarnings:"إجمالي الإيرادات", totalDeductions:"إجمالي الخصومات", saveBtn:"حفظ", savedMsg:"تم الحفظ بأمان في السحابة", remainingAfterSpending:"المتبقي بعد الإنفاق", netPayShort:"صافي الراتب", spentSoFar:"أُنفق حتى الآن", addExpenseTitle:"إضافة مصروف", whatSpentOn:"على ماذا أنفقت؟", totalSpent:"إجمالي الإنفاق", leftOfNetPay:"متبقٍ من صافي راتب هذا الشهر", historyLabel:"السجل", noSavedMonths:"لا توجد أشهر محفوظة بعد.", noSpendingLogged:"لا يوجد إنفاق مسجل لشهر", basicPay:"الراتب الأساسي", placeholderEarning:"مثال: الراتب الأساسي", placeholderDeduction:"مثال: صندوق التوفير" },
+ hi: { appEyebrow:"सैलरी लेजर", appTitle:"आपकी सैलरी, ट्रैक में", connected:"कनेक्टेड", signOut:"साइन आउट", settingsBtn:"सेटिंग्स", languageLabel:"भाषा", currencyLabel:"मुद्रा", done:"हो गया", welcomeTitle:"सैलरी लेजर में आपका स्वागत है", welcomeDesc:"डिवाइस पर सिंक करने के लिए साइन इन करें, या स्थानीय स्टोरेज के लिए गेस्ट मोड इस्तेमाल करें।", signIn:"साइन इन", createAccount:"खाता बनाएं", emailLabel:"ईमेल", passwordLabel:"पासवर्ड", passwordSignupPh:"कम से कम 6 अक्षर", passwordSigninPh:"आपका पासवर्ड", forgotPassword:"पासवर्ड भूल गए?", orDivider:"या", continueGoogle:"Google के साथ जारी रखें", continueGuest:"गेस्ट के रूप में जारी रखें (केवल स्थानीय)", tabSalary:"सैलरी", tabSpending:"दैनिक खर्च", netPayMonth:"इस महीने की नेट सैलरी", grossLabel:"सकल", deductionsLabel:"कटौतियां", earningsLabel:"कमाई", addLine:"+ पंक्ति जोड़ें", totalEarnings:"कुल कमाई", totalDeductions:"कुल कटौतियां", saveBtn:"सेव करें", savedMsg:"क्लाउड पर सुरक्षित रूप से सेव हो गया", remainingAfterSpending:"खर्च के बाद शेष", netPayShort:"नेट सैलरी", spentSoFar:"अब तक खर्च", addExpenseTitle:"खर्च जोड़ें", whatSpentOn:"किस पर खर्च किया?", totalSpent:"कुल खर्च", leftOfNetPay:"इस महीने की नेट सैलरी में से शेष", historyLabel:"इतिहास", noSavedMonths:"अभी तक कोई महीना सेव नहीं हुआ।", noSpendingLogged:"के लिए कोई खर्च दर्ज नहीं", basicPay:"मूल वेतन", placeholderEarning:"जैसे मूल वेतन", placeholderDeduction:"जैसे प्रोविडेंट फंड" },
+ es: { appEyebrow:"Libro de Salarios", appTitle:"Tu sueldo, controlado", connected:"Conectado", signOut:"Cerrar sesión", settingsBtn:"Ajustes", languageLabel:"Idioma", currencyLabel:"Moneda", done:"Listo", welcomeTitle:"Bienvenido a Libro de Salarios", welcomeDesc:"Inicia sesión para sincronizar entre dispositivos, o usa el modo invitado para almacenamiento local.", signIn:"Iniciar sesión", createAccount:"Crear cuenta", emailLabel:"Correo electrónico", passwordLabel:"Contraseña", passwordSignupPh:"Al menos 6 caracteres", passwordSigninPh:"Tu contraseña", forgotPassword:"¿Olvidaste tu contraseña?", orDivider:"o", continueGoogle:"Continuar con Google", continueGuest:"Continuar como invitado (solo local)", tabSalary:"Salario", tabSpending:"Gastos diarios", netPayMonth:"Salario neto este mes", grossLabel:"Bruto", deductionsLabel:"Deducciones", earningsLabel:"Ingresos", addLine:"+ Añadir línea", totalEarnings:"Total de ingresos", totalDeductions:"Total de deducciones", saveBtn:"Guardar", savedMsg:"Guardado de forma segura en la nube", remainingAfterSpending:"Restante después de gastos", netPayShort:"Salario neto", spentSoFar:"Gastado hasta ahora", addExpenseTitle:"Añadir un gasto", whatSpentOn:"¿En qué gastaste?", totalSpent:"Total gastado", leftOfNetPay:"restante del salario neto de este mes", historyLabel:"Historial", noSavedMonths:"Aún no hay meses guardados.", noSpendingLogged:"Sin gastos registrados para", basicPay:"Salario base", placeholderEarning:"p. ej. Salario base", placeholderDeduction:"p. ej. Fondo de previsión" },
+ fr: { appEyebrow:"Registre de Salaire", appTitle:"Votre salaire, suivi", connected:"Connecté", signOut:"Se déconnecter", settingsBtn:"Paramètres", languageLabel:"Langue", currencyLabel:"Devise", done:"Terminé", welcomeTitle:"Bienvenue sur Registre de Salaire", welcomeDesc:"Connectez-vous pour synchroniser entre appareils, ou utilisez le mode invité pour un stockage local.", signIn:"Se connecter", createAccount:"Créer un compte", emailLabel:"E-mail", passwordLabel:"Mot de passe", passwordSignupPh:"Au moins 6 caractères", passwordSigninPh:"Votre mot de passe", forgotPassword:"Mot de passe oublié ?", orDivider:"ou", continueGoogle:"Continuer avec Google", continueGuest:"Continuer en tant qu'invité (local uniquement)", tabSalary:"Salaire", tabSpending:"Dépenses quotidiennes", netPayMonth:"Salaire net ce mois-ci", grossLabel:"Brut", deductionsLabel:"Déductions", earningsLabel:"Revenus", addLine:"+ Ajouter une ligne", totalEarnings:"Total des revenus", totalDeductions:"Total des déductions", saveBtn:"Enregistrer", savedMsg:"Enregistré en toute sécurité dans le cloud", remainingAfterSpending:"Restant après dépenses", netPayShort:"Salaire net", spentSoFar:"Dépensé jusqu'à présent", addExpenseTitle:"Ajouter une dépense", whatSpentOn:"Pour quoi avez-vous dépensé ?", totalSpent:"Total dépensé", leftOfNetPay:"restant du salaire net de ce mois", historyLabel:"Historique", noSavedMonths:"Aucun mois enregistré pour l'instant.", noSpendingLogged:"Aucune dépense enregistrée pour", basicPay:"Salaire de base", placeholderEarning:"p. ex. Salaire de base", placeholderDeduction:"p. ex. Fonds de prévoyance" },
+ de: { appEyebrow:"Gehaltsbuch", appTitle:"Ihr Gehalt, im Blick", connected:"Verbunden", signOut:"Abmelden", settingsBtn:"Einstellungen", languageLabel:"Sprache", currencyLabel:"Währung", done:"Fertig", welcomeTitle:"Willkommen bei Gehaltsbuch", welcomeDesc:"Melden Sie sich an, um geräteübergreifend zu synchronisieren, oder nutzen Sie den Gastmodus für lokale Speicherung.", signIn:"Anmelden", createAccount:"Konto erstellen", emailLabel:"E-Mail", passwordLabel:"Passwort", passwordSignupPh:"Mindestens 6 Zeichen", passwordSigninPh:"Ihr Passwort", forgotPassword:"Passwort vergessen?", orDivider:"oder", continueGoogle:"Mit Google fortfahren", continueGuest:"Als Gast fortfahren (nur lokal)", tabSalary:"Gehalt", tabSpending:"Tägliche Ausgaben", netPayMonth:"Nettogehalt diesen Monat", grossLabel:"Brutto", deductionsLabel:"Abzüge", earningsLabel:"Einnahmen", addLine:"+ Zeile hinzufügen", totalEarnings:"Gesamteinnahmen", totalDeductions:"Gesamtabzüge", saveBtn:"Speichern", savedMsg:"Sicher in der Cloud gespeichert", remainingAfterSpending:"Verbleibend nach Ausgaben", netPayShort:"Nettogehalt", spentSoFar:"Bisher ausgegeben", addExpenseTitle:"Ausgabe hinzufügen", whatSpentOn:"Wofür ausgegeben?", totalSpent:"Gesamtausgaben", leftOfNetPay:"vom Nettogehalt dieses Monats übrig", historyLabel:"Verlauf", noSavedMonths:"Noch keine Monate gespeichert.", noSpendingLogged:"Keine Ausgaben erfasst für", basicPay:"Grundgehalt", placeholderEarning:"z. B. Grundgehalt", placeholderDeduction:"z. B. Vorsorgefonds" },
+ pt: { appEyebrow:"Livro de Salários", appTitle:"Seu salário, controlado", connected:"Conectado", signOut:"Sair", settingsBtn:"Configurações", languageLabel:"Idioma", currencyLabel:"Moeda", done:"Concluído", welcomeTitle:"Bem-vindo ao Livro de Salários", welcomeDesc:"Entre para sincronizar entre dispositivos, ou use o modo convidado para armazenamento local.", signIn:"Entrar", createAccount:"Criar conta", emailLabel:"E-mail", passwordLabel:"Senha", passwordSignupPh:"Pelo menos 6 caracteres", passwordSigninPh:"Sua senha", forgotPassword:"Esqueceu a senha?", orDivider:"ou", continueGoogle:"Continuar com Google", continueGuest:"Continuar como convidado (somente local)", tabSalary:"Salário", tabSpending:"Gastos diários", netPayMonth:"Salário líquido este mês", grossLabel:"Bruto", deductionsLabel:"Deduções", earningsLabel:"Ganhos", addLine:"+ Adicionar linha", totalEarnings:"Total de ganhos", totalDeductions:"Total de deduções", saveBtn:"Salvar", savedMsg:"Salvo com segurança na nuvem", remainingAfterSpending:"Restante após os gastos", netPayShort:"Salário líquido", spentSoFar:"Gasto até agora", addExpenseTitle:"Adicionar despesa", whatSpentOn:"Com o que você gastou?", totalSpent:"Total gasto", leftOfNetPay:"restante do salário líquido deste mês", historyLabel:"Histórico", noSavedMonths:"Nenhum mês salvo ainda.", noSpendingLogged:"Nenhum gasto registrado para", basicPay:"Salário base", placeholderEarning:"ex.: Salário base", placeholderDeduction:"ex.: Fundo de previdência" },
+ ru: { appEyebrow:"Журнал зарплаты", appTitle:"Ваша зарплата под контролем", connected:"Подключено", signOut:"Выйти", settingsBtn:"Настройки", languageLabel:"Язык", currencyLabel:"Валюта", done:"Готово", welcomeTitle:"Добро пожаловать в Журнал зарплаты", welcomeDesc:"Войдите, чтобы синхронизировать между устройствами, или используйте гостевой режим для локального хранения.", signIn:"Войти", createAccount:"Создать аккаунт", emailLabel:"Эл. почта", passwordLabel:"Пароль", passwordSignupPh:"Минимум 6 символов", passwordSigninPh:"Ваш пароль", forgotPassword:"Забыли пароль?", orDivider:"или", continueGoogle:"Продолжить с Google", continueGuest:"Продолжить как гость (только локально)", tabSalary:"Зарплата", tabSpending:"Ежедневные траты", netPayMonth:"Чистая зарплата за этот месяц", grossLabel:"Валовая", deductionsLabel:"Удержания", earningsLabel:"Доходы", addLine:"+ Добавить строку", totalEarnings:"Итого доходы", totalDeductions:"Итого удержания", saveBtn:"Сохранить", savedMsg:"Надёжно сохранено в облаке", remainingAfterSpending:"Остаток после трат", netPayShort:"Чистая зарплата", spentSoFar:"Потрачено на данный момент", addExpenseTitle:"Добавить трату", whatSpentOn:"На что потрачено?", totalSpent:"Всего потрачено", leftOfNetPay:"осталось от чистой зарплаты за этот месяц", historyLabel:"История", noSavedMonths:"Пока нет сохранённых месяцев.", noSpendingLogged:"Нет трат за", basicPay:"Базовая зарплата", placeholderEarning:"напр. Базовая зарплата", placeholderDeduction:"напр. Пенсионный фонд" },
+ zh: { appEyebrow:"薪资账本", appTitle:"清晰掌握你的薪资", connected:"已连接", signOut:"退出登录", settingsBtn:"设置", languageLabel:"语言", currencyLabel:"货币", done:"完成", welcomeTitle:"欢迎使用薪资账本", welcomeDesc:"登录以在设备间同步，或使用访客模式仅在本地存储。", signIn:"登录", createAccount:"创建账户", emailLabel:"邮箱", passwordLabel:"密码", passwordSignupPh:"至少6个字符", passwordSigninPh:"您的密码", forgotPassword:"忘记密码？", orDivider:"或", continueGoogle:"使用 Google 继续", continueGuest:"以访客身份继续（仅本地）", tabSalary:"薪资", tabSpending:"每日支出", netPayMonth:"本月净收入", grossLabel:"总额", deductionsLabel:"扣除项", earningsLabel:"收入", addLine:"+ 添加一行", totalEarnings:"收入总计", totalDeductions:"扣除总计", saveBtn:"保存", savedMsg:"已安全保存到云端", remainingAfterSpending:"支出后剩余", netPayShort:"净收入", spentSoFar:"目前已花费", addExpenseTitle:"添加支出", whatSpentOn:"花在了什么上？", totalSpent:"总支出", leftOfNetPay:"为本月净收入剩余部分", historyLabel:"历史记录", noSavedMonths:"尚未保存任何月份。", noSpendingLogged:"没有记录支出：", basicPay:"基本工资", placeholderEarning:"例如：基本工资", placeholderDeduction:"例如：公积金" },
+ tr: { appEyebrow:"Maaş Defteri", appTitle:"Maaşınız, takipte", connected:"Bağlı", signOut:"Çıkış yap", settingsBtn:"Ayarlar", languageLabel:"Dil", currencyLabel:"Para birimi", done:"Bitti", welcomeTitle:"Maaş Defteri'ne hoş geldiniz", welcomeDesc:"Cihazlar arasında senkronize etmek için giriş yapın veya yerel depolama için misafir modunu kullanın.", signIn:"Giriş yap", createAccount:"Hesap oluştur", emailLabel:"E-posta", passwordLabel:"Şifre", passwordSignupPh:"En az 6 karakter", passwordSigninPh:"Şifreniz", forgotPassword:"Şifrenizi mi unuttunuz?", orDivider:"veya", continueGoogle:"Google ile devam et", continueGuest:"Misafir olarak devam et (yalnızca yerel)", tabSalary:"Maaş", tabSpending:"Günlük harcamalar", netPayMonth:"Bu ayki net maaş", grossLabel:"Brüt", deductionsLabel:"Kesintiler", earningsLabel:"Kazançlar", addLine:"+ Satır ekle", totalEarnings:"Toplam kazanç", totalDeductions:"Toplam kesinti", saveBtn:"Kaydet", savedMsg:"Buluta güvenli şekilde kaydedildi", remainingAfterSpending:"Harcama sonrası kalan", netPayShort:"Net maaş", spentSoFar:"Şu ana kadar harcanan", addExpenseTitle:"Harcama ekle", whatSpentOn:"Neye harcadınız?", totalSpent:"Toplam harcama", leftOfNetPay:"bu ayın net maaşından kalan", historyLabel:"Geçmiş", noSavedMonths:"Henüz kaydedilmiş ay yok.", noSpendingLogged:"için harcama kaydı yok", basicPay:"Temel maaş", placeholderEarning:"örn. Temel maaş", placeholderDeduction:"örn. Emeklilik fonu" },
+ fa: { appEyebrow:"دفتر حقوق", appTitle:"حقوق شما، رهگیری‌شده", connected:"متصل", signOut:"خروج", settingsBtn:"تنظیمات", languageLabel:"زبان", currencyLabel:"واحد پول", done:"انجام شد", welcomeTitle:"به دفتر حقوق خوش آمدید", welcomeDesc:"برای همگام‌سازی بین دستگاه‌ها وارد شوید، یا از حالت مهمان برای ذخیره محلی استفاده کنید.", signIn:"ورود", createAccount:"ایجاد حساب", emailLabel:"ایمیل", passwordLabel:"رمز عبور", passwordSignupPh:"حداقل ۶ کاراکتر", passwordSigninPh:"رمز عبور شما", forgotPassword:"رمز عبور را فراموش کرده‌اید؟", orDivider:"یا", continueGoogle:"ادامه با گوگل", continueGuest:"ادامه به عنوان مهمان (فقط محلی)", tabSalary:"حقوق", tabSpending:"هزینه‌های روزانه", netPayMonth:"حقوق خالص این ماه", grossLabel:"ناخالص", deductionsLabel:"کسورات", earningsLabel:"درآمدها", addLine:"+ افزودن ردیف", totalEarnings:"جمع درآمد", totalDeductions:"جمع کسورات", saveBtn:"ذخیره", savedMsg:"با امنیت در فضای ابری ذخیره شد", remainingAfterSpending:"باقیمانده پس از هزینه‌ها", netPayShort:"حقوق خالص", spentSoFar:"هزینه‌شده تاکنون", addExpenseTitle:"افزودن هزینه", whatSpentOn:"برای چه چیزی خرج کردید؟", totalSpent:"جمع هزینه", leftOfNetPay:"باقیمانده از حقوق خالص این ماه", historyLabel:"تاریخچه", noSavedMonths:"هنوز ماهی ذخیره نشده است.", noSpendingLogged:"هزینه‌ای ثبت نشده برای", basicPay:"حقوق پایه", placeholderEarning:"مثلاً حقوق پایه", placeholderDeduction:"مثلاً صندوق بازنشستگی" },
+ bn: { appEyebrow:"বেতন খাতা", appTitle:"আপনার বেতন, ট্র্যাকে", connected:"সংযুক্ত", signOut:"সাইন আউট", settingsBtn:"সেটিংস", languageLabel:"ভাষা", currencyLabel:"মুদ্রা", done:"সম্পন্ন", welcomeTitle:"বেতন খাতায় স্বাগতম", welcomeDesc:"ডিভাইসের মধ্যে সিঙ্ক করতে সাইন ইন করুন, অথবা স্থানীয় সংরক্ষণের জন্য গেস্ট মোড ব্যবহার করুন।", signIn:"সাইন ইন", createAccount:"অ্যাকাউন্ট তৈরি করুন", emailLabel:"ইমেইল", passwordLabel:"পাসওয়ার্ড", passwordSignupPh:"কমপক্ষে ৬ অক্ষর", passwordSigninPh:"আপনার পাসওয়ার্ড", forgotPassword:"পাসওয়ার্ড ভুলে গেছেন?", orDivider:"অথবা", continueGoogle:"Google দিয়ে চালিয়ে যান", continueGuest:"অতিথি হিসেবে চালিয়ে যান (শুধু স্থানীয়)", tabSalary:"বেতন", tabSpending:"দৈনিক খরচ", netPayMonth:"এই মাসের নিট বেতন", grossLabel:"মোট", deductionsLabel:"কর্তন", earningsLabel:"আয়", addLine:"+ লাইন যোগ করুন", totalEarnings:"মোট আয়", totalDeductions:"মোট কর্তন", saveBtn:"সংরক্ষণ করুন", savedMsg:"ক্লাউডে নিরাপদে সংরক্ষিত হয়েছে", remainingAfterSpending:"খরচের পর অবশিষ্ট", netPayShort:"নিট বেতন", spentSoFar:"এখন পর্যন্ত খরচ", addExpenseTitle:"খরচ যোগ করুন", whatSpentOn:"কিসের জন্য খরচ করেছেন?", totalSpent:"মোট খরচ", leftOfNetPay:"এই মাসের নিট বেতন থেকে অবশিষ্ট", historyLabel:"ইতিহাস", noSavedMonths:"এখনো কোনো মাস সংরক্ষিত হয়নি।", noSpendingLogged:"এর জন্য কোনো খরচ নথিভুক্ত নেই", basicPay:"মূল বেতন", placeholderEarning:"যেমন মূল বেতন", placeholderDeduction:"যেমন প্রভিডেন্ট ফান্ড" },
+ id: { appEyebrow:"Buku Gaji", appTitle:"Gaji Anda, terpantau", connected:"Terhubung", signOut:"Keluar", settingsBtn:"Pengaturan", languageLabel:"Bahasa", currencyLabel:"Mata uang", done:"Selesai", welcomeTitle:"Selamat datang di Buku Gaji", welcomeDesc:"Masuk untuk sinkronisasi antar perangkat, atau gunakan mode tamu untuk penyimpanan lokal.", signIn:"Masuk", createAccount:"Buat akun", emailLabel:"Email", passwordLabel:"Kata sandi", passwordSignupPh:"Minimal 6 karakter", passwordSigninPh:"Kata sandi Anda", forgotPassword:"Lupa kata sandi?", orDivider:"atau", continueGoogle:"Lanjutkan dengan Google", continueGuest:"Lanjutkan sebagai tamu (lokal saja)", tabSalary:"Gaji", tabSpending:"Pengeluaran harian", netPayMonth:"Gaji bersih bulan ini", grossLabel:"Kotor", deductionsLabel:"Potongan", earningsLabel:"Pendapatan", addLine:"+ Tambah baris", totalEarnings:"Total pendapatan", totalDeductions:"Total potongan", saveBtn:"Simpan", savedMsg:"Tersimpan dengan aman di cloud", remainingAfterSpending:"Sisa setelah pengeluaran", netPayShort:"Gaji bersih", spentSoFar:"Terpakai sejauh ini", addExpenseTitle:"Tambah pengeluaran", whatSpentOn:"Untuk apa pengeluaran ini?", totalSpent:"Total pengeluaran", leftOfNetPay:"tersisa dari gaji bersih bulan ini", historyLabel:"Riwayat", noSavedMonths:"Belum ada bulan yang tersimpan.", noSpendingLogged:"Tidak ada pengeluaran tercatat untuk", basicPay:"Gaji pokok", placeholderEarning:"mis. Gaji pokok", placeholderDeduction:"mis. Dana pensiun" },
+ it: { appEyebrow:"Libro Paga", appTitle:"Il tuo stipendio, sotto controllo", connected:"Connesso", signOut:"Esci", settingsBtn:"Impostazioni", languageLabel:"Lingua", currencyLabel:"Valuta", done:"Fatto", welcomeTitle:"Benvenuto su Libro Paga", welcomeDesc:"Accedi per sincronizzare tra dispositivi, oppure usa la modalità ospite per l'archiviazione locale.", signIn:"Accedi", createAccount:"Crea account", emailLabel:"Email", passwordLabel:"Password", passwordSignupPh:"Almeno 6 caratteri", passwordSigninPh:"La tua password", forgotPassword:"Password dimenticata?", orDivider:"o", continueGoogle:"Continua con Google", continueGuest:"Continua come ospite (solo locale)", tabSalary:"Stipendio", tabSpending:"Spese giornaliere", netPayMonth:"Stipendio netto questo mese", grossLabel:"Lordo", deductionsLabel:"Deduzioni", earningsLabel:"Guadagni", addLine:"+ Aggiungi riga", totalEarnings:"Totale guadagni", totalDeductions:"Totale deduzioni", saveBtn:"Salva", savedMsg:"Salvato in modo sicuro sul cloud", remainingAfterSpending:"Rimanente dopo le spese", netPayShort:"Stipendio netto", spentSoFar:"Speso finora", addExpenseTitle:"Aggiungi una spesa", whatSpentOn:"Per cosa hai speso?", totalSpent:"Totale speso", leftOfNetPay:"rimasto dello stipendio netto di questo mese", historyLabel:"Cronologia", noSavedMonths:"Nessun mese salvato ancora.", noSpendingLogged:"Nessuna spesa registrata per", basicPay:"Stipendio base", placeholderEarning:"es. Stipendio base", placeholderDeduction:"es. Fondo previdenziale" },
+ ja: { appEyebrow:"給与台帳", appTitle:"あなたの給与を管理", connected:"接続済み", signOut:"サインアウト", settingsBtn:"設定", languageLabel:"言語", currencyLabel:"通貨", done:"完了", welcomeTitle:"給与台帳へようこそ", welcomeDesc:"デバイス間で同期するにはサインインしてください。ローカル保存にはゲストモードをご利用ください。", signIn:"サインイン", createAccount:"アカウント作成", emailLabel:"メールアドレス", passwordLabel:"パスワード", passwordSignupPh:"6文字以上", passwordSigninPh:"パスワード", forgotPassword:"パスワードをお忘れですか？", orDivider:"または", continueGoogle:"Googleで続ける", continueGuest:"ゲストとして続ける（ローカルのみ）", tabSalary:"給与", tabSpending:"日々の支出", netPayMonth:"今月の手取り給与", grossLabel:"総額", deductionsLabel:"控除", earningsLabel:"収入", addLine:"+ 行を追加", totalEarnings:"収入合計", totalDeductions:"控除合計", saveBtn:"保存", savedMsg:"クラウドに安全に保存されました", remainingAfterSpending:"支出後の残り", netPayShort:"手取り給与", spentSoFar:"これまでの支出", addExpenseTitle:"支出を追加", whatSpentOn:"何に使いましたか？", totalSpent:"支出合計", leftOfNetPay:"今月の手取り給与の残り", historyLabel:"履歴", noSavedMonths:"保存された月はまだありません。", noSpendingLogged:"の支出記録はありません", basicPay:"基本給", placeholderEarning:"例：基本給", placeholderDeduction:"例：積立基金" },
+ ko: { appEyebrow:"급여 장부", appTitle:"내 급여, 한눈에", connected:"연결됨", signOut:"로그아웃", settingsBtn:"설정", languageLabel:"언어", currencyLabel:"통화", done:"완료", welcomeTitle:"급여 장부에 오신 것을 환영합니다", welcomeDesc:"기기 간 동기화를 위해 로그인하거나, 로컬 저장을 위해 게스트 모드를 사용하세요.", signIn:"로그인", createAccount:"계정 만들기", emailLabel:"이메일", passwordLabel:"비밀번호", passwordSignupPh:"6자 이상", passwordSigninPh:"비밀번호", forgotPassword:"비밀번호를 잊으셨나요?", orDivider:"또는", continueGoogle:"Google로 계속하기", continueGuest:"게스트로 계속하기 (로컬 전용)", tabSalary:"급여", tabSpending:"일일 지출", netPayMonth:"이번 달 실수령액", grossLabel:"총액", deductionsLabel:"공제", earningsLabel:"수입", addLine:"+ 항목 추가", totalEarnings:"총 수입", totalDeductions:"총 공제", saveBtn:"저장", savedMsg:"클라우드에 안전하게 저장됨", remainingAfterSpending:"지출 후 남은 금액", netPayShort:"실수령액", spentSoFar:"지금까지 지출", addExpenseTitle:"지출 추가", whatSpentOn:"무엇에 사용했나요?", totalSpent:"총 지출", leftOfNetPay:"이번 달 실수령액 중 남은 금액", historyLabel:"기록", noSavedMonths:"저장된 달이 아직 없습니다.", noSpendingLogged:"에 대한 지출 기록 없음", basicPay:"기본급", placeholderEarning:"예: 기본급", placeholderDeduction:"예: 적립 기금" }
+ };
+
+ const CURRENCIES = {
+ PKR:{symbol:"Rs",name:"Pakistani Rupee"}, USD:{symbol:"$",name:"US Dollar"}, EUR:{symbol:"€",name:"Euro"},
+ GBP:{symbol:"£",name:"British Pound"}, INR:{symbol:"₹",name:"Indian Rupee"}, AED:{symbol:"د.إ",name:"UAE Dirham"},
+ SAR:{symbol:"﷼",name:"Saudi Riyal"}, QAR:{symbol:"QR",name:"Qatari Riyal"}, KWD:{symbol:"KD",name:"Kuwaiti Dinar"},
+ BHD:{symbol:"BD",name:"Bahraini Dinar"}, OMR:{symbol:"OMR",name:"Omani Rial"}, CNY:{symbol:"¥",name:"Chinese Yuan"},
+ JPY:{symbol:"¥",name:"Japanese Yen"}, KRW:{symbol:"₩",name:"South Korean Won"}, TRY:{symbol:"₺",name:"Turkish Lira"},
+ RUB:{symbol:"₽",name:"Russian Ruble"}, BRL:{symbol:"R$",name:"Brazilian Real"}, ZAR:{symbol:"R",name:"South African Rand"},
+ NGN:{symbol:"₦",name:"Nigerian Naira"}, EGP:{symbol:"E£",name:"Egyptian Pound"}, BDT:{symbol:"৳",name:"Bangladeshi Taka"},
+ IDR:{symbol:"Rp",name:"Indonesian Rupiah"}, MYR:{symbol:"RM",name:"Malaysian Ringgit"}, THB:{symbol:"฿",name:"Thai Baht"},
+ PHP:{symbol:"₱",name:"Philippine Peso"}, VND:{symbol:"₫",name:"Vietnamese Dong"}, CAD:{symbol:"C$",name:"Canadian Dollar"},
+ AUD:{symbol:"A$",name:"Australian Dollar"}, CHF:{symbol:"CHF",name:"Swiss Franc"}, SGD:{symbol:"S$",name:"Singapore Dollar"},
+ KES:{symbol:"KSh",name:"Kenyan Shilling"}, GHS:{symbol:"GH₵",name:"Ghanaian Cedi"}
+ };
+
+ const REGION_CURRENCY = { pk:"PKR", us:"USD", gb:"GBP", in:"INR", ae:"AED", sa:"SAR", qa:"QAR", kw:"KWD", bh:"BHD", om:"OMR", cn:"CNY", jp:"JPY", kr:"KRW", tr:"TRY", ru:"RUB", br:"BRL", za:"ZAR", ng:"NGN", eg:"EGP", bd:"BDT", id:"IDR", my:"MYR", th:"THB", ph:"PHP", vn:"VND", ca:"CAD", au:"AUD", ch:"CHF", sg:"SGD", ke:"KES", gh:"GHS", de:"EUR", fr:"EUR", es:"EUR", it:"EUR", pt:"EUR" };
+
+ function t(key) {
+ const lang = state.settings.lang;
+ return (I18N[lang] && I18N[lang][key]) || I18N.en[key] || key;
+ }
+
+ function guessDefaultSettings() {
+ const nav = (navigator.language || 'en').toLowerCase();
+ const langCode = nav.split('-')[0];
+ const lang = I18N[langCode] ? langCode : 'en';
+ const region = nav.split('-')[1] || '';
+ const currency = REGION_CURRENCY[region] || 'PKR';
+ return { lang, currency };
+ }
+
+ function applyDocumentDirection() {
+ const meta = LANG_META[state.settings.lang];
+ document.documentElement.setAttribute('lang', state.settings.lang);
+ document.documentElement.setAttribute('dir', (meta && meta.rtl) ? 'rtl' : 'ltr');
+ }
+
  const MONTHS = ["January","February","March","April","May","June","July","August","September","October","November","December"];
  let currentUser = null;
  let view = 'salary';
  let authMode = 'signin'; // 'signin' | 'signup'
+ let settingsOpen = false;
+
+ let storedSettings = null;
+ try { storedSettings = JSON.parse(localStorage.getItem('salaryLedgerSettings') || 'null'); } catch (e) { storedSettings = null; }
+
  let state = {
  year: new Date().getFullYear(),
  month: new Date().getMonth(),
  earnings: [{ name: "Basic pay", amount: 0 }],
  deductions: [],
- expenses: []
+ expenses: [],
+ settings: storedSettings || guessDefaultSettings()
  };
+ applyDocumentDirection();
+
  let history = [];
  let monthListener = null;
  let historyListener = null;
+ let settingsListener = null;
 
  function monthPath(uid, year, month) {
  return `users/${uid}/ledger/${year}-${String(month+1).padStart(2,'0')}`;
  }
  function fmt(n) {
  const v = Number(n) || 0;
- return v.toLocaleString(undefined, { maximumFractionDigits: 2 });
+ try { return v.toLocaleString(state.settings.lang, { maximumFractionDigits: 2 }); }
+ catch (e) { return v.toLocaleString(undefined, { maximumFractionDigits: 2 }); }
+ }
+ function money(n) {
+ const cur = CURRENCIES[state.settings.currency] || CURRENCIES.PKR;
+ return `${cur.symbol} ${fmt(n)}`;
+ }
+ function monthYearLabel(y, m) {
+ try { return new Intl.DateTimeFormat(state.settings.lang, { month: 'long', year: 'numeric' }).format(new Date(y, m, 1)); }
+ catch (e) { return `${MONTHS[m]} ${y}`; }
+ }
+ function monthOnlyLabel(y, m) {
+ try { return new Intl.DateTimeFormat(state.settings.lang, { month: 'long' }).format(new Date(y, m, 1)); }
+ catch (e) { return MONTHS[m]; }
  }
  function sum(arr) { return arr ? arr.reduce((a,b) => a + (Number(b.amount) || 0), 0) : 0; }
  function daysInMonth(year, month) { return new Date(year, month + 1, 0).getDate(); }
@@ -309,6 +432,7 @@ const db = firebase.database();
  document.getElementById('userEmail').textContent = user.email || 'Google User';
  document.getElementById('userAvatar').textContent = (user.email || 'U').charAt(0).toUpperCase();
  }
+ listenToSettings(user.uid);
  listenToMonth(state.year, state.month);
  listenToHistory();
  } else {
@@ -316,9 +440,29 @@ const db = firebase.database();
  document.getElementById('syncBadge').style.display = 'none';
  if (monthListener) monthListener.off();
  if (historyListener) historyListener.off();
+ if (settingsListener) settingsListener.off();
  renderAuthScreen();
  }
  });
+
+ function listenToSettings(uid) {
+ if (settingsListener) settingsListener.off();
+ settingsListener = db.ref(`users/${uid}/settings`);
+ settingsListener.on('value', (snapshot) => {
+ const data = snapshot.val();
+ if (data && data.lang && data.currency) {
+ state.settings = { lang: data.lang, currency: data.currency };
+ } else {
+ db.ref(`users/${uid}/settings`).set(state.settings);
+ }
+ localStorage.setItem('salaryLedgerSettings', JSON.stringify(state.settings));
+ applyDocumentDirection();
+ document.getElementById('eyebrowText').textContent = t('appEyebrow');
+ document.getElementById('titleText').textContent = t('appTitle');
+ document.getElementById('signOutBtn').textContent = t('signOut');
+ render();
+ });
+ }
 
  function listenToMonth(year, month) {
  if (!currentUser) return;
@@ -328,11 +472,11 @@ const db = firebase.database();
  monthListener.on('value', (snapshot) => {
  const data = snapshot.val();
  if (data) {
- state.earnings = data.earnings || [{ name: "Basic pay", amount: 0 }];
+ state.earnings = data.earnings || [{ name: t('basicPay'), amount: 0 }];
  state.deductions = data.deductions || [];
  state.expenses = (data.expenses || []).sort((a,b) => a.day - b.day);
  } else {
- state.earnings = [{ name: "Basic pay", amount: 0 }];
+ state.earnings = [{ name: t('basicPay'), amount: 0 }];
  state.deductions = [];
  state.expenses = [];
  }
@@ -362,22 +506,13 @@ const db = firebase.database();
  function saveSalary() {
  if (!currentUser) return;
  const path = monthPath(currentUser.uid, state.year, state.month);
- db.ref(path).update({
- year: state.year,
- month: state.month,
- earnings: state.earnings,
- deductions: state.deductions
- });
+ db.ref(path).update({ year: state.year, month: state.month, earnings: state.earnings, deductions: state.deductions });
  flashMsg();
  }
  function saveExpenses() {
  if (!currentUser) return;
  const path = monthPath(currentUser.uid, state.year, state.month);
- db.ref(path).update({
- year: state.year,
- month: state.month,
- expenses: state.expenses
- });
+ db.ref(path).update({ year: state.year, month: state.month, expenses: state.expenses });
  }
  function flashMsg() {
  const msg = document.getElementById('saveMsg');
@@ -389,54 +524,64 @@ const db = firebase.database();
 
  function renderAuthScreen() {
  const isSignup = authMode === 'signup';
+ document.getElementById('eyebrowText').textContent = t('appEyebrow');
+ document.getElementById('titleText').textContent = t('appTitle');
  document.getElementById('content').innerHTML = `
  <div class="auth-card">
- <h2>Welcome to Salary Ledger</h2>
- <p>Sign in to sync across devices, or use Guest Mode for local device storage.</p>
+ <h2>${t('welcomeTitle')}</h2>
+ <p>${t('welcomeDesc')}</p>
+
+ <div class="auth-prefs">
+ <select id="preLangSelect" onchange="__salaryApp.changeLang(this.value)">
+ ${Object.keys(LANG_META).map(code => `<option value="${code}" ${state.settings.lang===code?'selected':''}>${LANG_META[code].name}</option>`).join('')}
+ </select>
+ <select id="preCurrSelect" onchange="__salaryApp.changeCurrency(this.value)">
+ ${Object.keys(CURRENCIES).map(code => `<option value="${code}" ${state.settings.currency===code?'selected':''}>${code} (${CURRENCIES[code].symbol})</option>`).join('')}
+ </select>
+ </div>
 
  <div class="auth-tabs">
- <button class="${!isSignup ? 'active' : ''}" onclick="__salaryApp.setAuthMode('signin')">Sign In</button>
- <button class="${isSignup ? 'active' : ''}" onclick="__salaryApp.setAuthMode('signup')">Create Account</button>
+ <button class="${!isSignup ? 'active' : ''}" onclick="__salaryApp.setAuthMode('signin')">${t('signIn')}</button>
+ <button class="${isSignup ? 'active' : ''}" onclick="__salaryApp.setAuthMode('signup')">${t('createAccount')}</button>
  </div>
 
  <div class="auth-error" id="authError"></div>
  <div class="auth-success" id="authSuccess"></div>
 
  <div class="auth-field">
- <label for="authEmail">Email</label>
+ <label for="authEmail">${t('emailLabel')}</label>
  <input type="email" id="authEmail" placeholder="you@example.com" autocomplete="email">
  </div>
  <div class="auth-field">
- <label for="authPassword">Password</label>
- <input type="password" id="authPassword" placeholder="${isSignup ? 'At least 6 characters' : 'Your password'}" autocomplete="${isSignup ? 'new-password' : 'current-password'}">
+ <label for="authPassword">${t('passwordLabel')}</label>
+ <input type="password" id="authPassword" placeholder="${isSignup ? t('passwordSignupPh') : t('passwordSigninPh')}" autocomplete="${isSignup ? 'new-password' : 'current-password'}">
  </div>
 
  <button class="auth-btn-primary" id="authSubmitBtn" onclick="__salaryApp.submitEmailAuth()">
- ${isSignup ? 'Create Account' : 'Sign In'}
+ ${isSignup ? t('createAccount') : t('signIn')}
  </button>
 
- ${isSignup ? '' : '<button class="auth-forgot" onclick="__salaryApp.resetPassword()">Forgot password?</button>'}
+ ${isSignup ? '' : `<button class="auth-forgot" onclick="__salaryApp.resetPassword()">${t('forgotPassword')}</button>`}
 
- <div class="auth-divider">or</div>
+ <div class="auth-divider">${t('orDivider')}</div>
 
  <button class="auth-btn-google" onclick="__salaryApp.loginWithGoogle()">
  <svg width="18" height="18" viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z"/></svg>
- Continue with Google
+ ${t('continueGoogle')}
  </button>
  <button class="auth-btn-guest" onclick="__salaryApp.loginGuest()">
- Continue as Guest (Local Only)
+ ${t('continueGuest')}
  </button>
  </div>
  `;
 
- // Let Enter key submit the form from either field
  const emailEl = document.getElementById('authEmail');
  const passEl = document.getElementById('authPassword');
  [emailEl, passEl].forEach(el => {
- el.addEventListener('keydown', (e) => {
- if (e.key === 'Enter') __salaryApp.submitEmailAuth();
+ el.addEventListener('keydown', (e) => { if (e.key === 'Enter') __salaryApp.submitEmailAuth(); });
  });
- });
+
+ renderSettingsOverlay();
  }
 
  function renderSalaryView() {
@@ -445,25 +590,25 @@ const db = firebase.database();
  const net = gross - ded;
  return `
  <div class="hero">
- <div class="label" id="heroLabel">Net pay this month</div>
- <div class="amount">Rs <span id="netAmount">${fmt(net)}</span></div>
+ <div class="label">${t('netPayMonth')}</div>
+ <div class="amount">${money(net)}</div>
  <div class="sub">
- <span>Gross <b id="grossVal">${fmt(gross)}</b></span>
- <span>Deductions <b id="dedVal">${fmt(ded)}</b></span>
+ <span>${t('grossLabel')} <b>${money(gross)}</b></span>
+ <span>${t('deductionsLabel')} <b>${money(ded)}</b></span>
  </div>
  </div>
  <div class="card earnings">
- <h2>Earnings <button class="add-btn" onclick="__salaryApp.add('earnings')">+ Add line</button></h2>
+ <h2>${t('earningsLabel')} <button class="add-btn" onclick="__salaryApp.add('earnings')">${t('addLine')}</button></h2>
  <div id="earningsRows">${rowsHtml('earnings')}</div>
- <div class="total-row"><span>Total earnings</span><span class="val">Rs <span id="earnTotal">${fmt(gross)}</span></span></div>
+ <div class="total-row"><span>${t('totalEarnings')}</span><span class="val">${money(gross)}</span></div>
  </div>
  <div class="card deductions">
- <h2>Deductions <button class="add-btn" onclick="__salaryApp.add('deductions')">+ Add line</button></h2>
+ <h2>${t('deductionsLabel')} <button class="add-btn" onclick="__salaryApp.add('deductions')">${t('addLine')}</button></h2>
  <div id="deductionsRows">${rowsHtml('deductions')}</div>
- <div class="total-row"><span>Total deductions</span><span class="val">Rs <span id="dedTotal">${fmt(ded)}</span></span></div>
+ <div class="total-row"><span>${t('totalDeductions')}</span><span class="val">${money(ded)}</span></div>
  </div>
- <button class="save-btn" onclick="__salaryApp.save()">Save ${MONTHS[state.month]} ${state.year}</button>
- <div class="save-msg" id="saveMsg">Saved securely to cloud</div>
+ <button class="save-btn" onclick="__salaryApp.save()">${t('saveBtn')} ${monthYearLabel(state.year, state.month)}</button>
+ <div class="save-msg" id="saveMsg">${t('savedMsg')}</div>
  `;
  }
  function renderSpendingView() {
@@ -474,38 +619,38 @@ const db = firebase.database();
  const remaining = net - spent;
  return `
  <div class="hero">
- <div class="label" id="heroLabel">Remaining after spending</div>
- <div class="amount">Rs <span id="netAmount">${fmt(remaining)}</span></div>
+ <div class="label">${t('remainingAfterSpending')}</div>
+ <div class="amount">${money(remaining)}</div>
  <div class="sub">
- <span>Net pay <b id="grossVal">${fmt(net)}</b></span>
- <span>Spent so far <b id="dedVal">${fmt(spent)}</b></span>
+ <span>${t('netPayShort')} <b>${money(net)}</b></span>
+ <span>${t('spentSoFar')} <b>${money(spent)}</b></span>
  </div>
  </div>
  <div class="card spending">
- <h2>Add an expense</h2>
+ <h2>${t('addExpenseTitle')}</h2>
  <div class="expense-form">
- <input type="number" class="day-input" id="expDay" min="1" max="${daysInMonth(state.year, state.month)}" value="${todayDefaultDay()}" placeholder="Day">
- <input type="text" class="note-input" id="expNote" placeholder="What did you spend on?">
- <input type="number" class="amt-input" id="expAmt" placeholder="Rs">
+ <input type="number" class="day-input" id="expDay" min="1" max="${daysInMonth(state.year, state.month)}" value="${todayDefaultDay()}" placeholder="${monthOnlyLabel(state.year,state.month).slice(0,3)}">
+ <input type="text" class="note-input" id="expNote" placeholder="${t('whatSpentOn')}">
+ <input type="number" class="amt-input" id="expAmt" placeholder="${(CURRENCIES[state.settings.currency]||CURRENCIES.PKR).symbol}">
  <button class="add-expense-btn" onclick="__salaryApp.addExpense()" aria-label="Add expense">+</button>
  </div>
  </div>
  <div class="card spending">
- <h2>${MONTHS[state.month]} spending</h2>
+ <h2>${monthOnlyLabel(state.year, state.month)} ${t('tabSpending').toLowerCase()}</h2>
  <div id="expenseRows">${expenseRowsHtml()}</div>
- <div class="total-row"><span>Total spent</span><span class="val">Rs <span id="spentTotal">${fmt(spent)}</span></span></div>
+ <div class="total-row"><span>${t('totalSpent')}</span><span class="val">${money(spent)}</span></div>
  </div>
- <div class="save-msg show" style="color: var(--text-lo);" id="remainingNote">Rs <span id="remainingVal">${fmt(remaining)}</span> left of this month's net pay</div>
+ <div class="save-msg show" style="color: var(--text-lo);" id="remainingNote">${money(remaining)} ${t('leftOfNetPay')}</div>
  `;
  }
  function rowsHtml(type) {
  return state[type].map((item, idx) => `
  <div class="row">
- <input type="text" placeholder="${type === 'earnings' ? 'e.g. Basic salary' : 'e.g. Provident fund'}"
+ <input type="text" placeholder="${type === 'earnings' ? t('placeholderEarning') : t('placeholderDeduction')}"
  value="${(item.name || '').replace(/"/g,'&quot;')}"
  oninput="__salaryApp.setName('${type}', ${idx}, this.value)">
  <div class="amt-wrap">
- <span>Rs</span>
+ <span>${(CURRENCIES[state.settings.currency]||CURRENCIES.PKR).symbol}</span>
  <input type="number" inputmode="decimal" value="${item.amount || ''}" placeholder="0"
  oninput="__salaryApp.setAmount('${type}', ${idx}, this.value)">
  </div>
@@ -514,25 +659,25 @@ const db = firebase.database();
  `).join('');
  }
  function expenseRowsHtml() {
- if (!state.expenses.length) return `<div class="empty-state">No spending logged for ${MONTHS[state.month]}.</div>`;
+ if (!state.expenses.length) return `<div class="empty-state">${t('noSpendingLogged')} ${monthOnlyLabel(state.year, state.month)}.</div>`;
  return state.expenses.map((item) => `
  <div class="expense-row">
  <div class="day-badge">${item.day}</div>
  <div class="note">${(item.note || 'Expense').replace(/</g,'&lt;')}</div>
- <div class="amt">Rs ${fmt(item.amount)}</div>
+ <div class="amt">${money(item.amount)}</div>
  <button class="del" onclick="__salaryApp.removeExpense('${item.id}')" aria-label="Remove">✕</button>
  </div>
  `).join('');
  }
  function historyHtml() {
- if (!history.length) return `<div class="empty-state">No saved months yet.</div>`;
+ if (!history.length) return `<div class="empty-state">${t('noSavedMonths')}</div>`;
  return history.map(h => `
  <div class="history-item" onclick="__salaryApp.goTo(${h.year}, ${h.month})">
  <div class="h-left">
- <div class="h-month">${MONTHS[h.month]} ${h.year}</div>
- <div class="h-sub">Gross Rs ${fmt(h.gross)} · Spent Rs ${fmt(h.spent)}</div>
+ <div class="h-month">${monthYearLabel(h.year, h.month)}</div>
+ <div class="h-sub">${t('grossLabel')} ${money(h.gross)} · ${t('spentSoFar')} ${money(h.spent)}</div>
  </div>
- <div class="h-net">Rs ${fmt(h.net - h.spent)}</div>
+ <div class="h-net">${money(h.net - h.spent)}</div>
  </div>
  `).join('');
  }
@@ -541,47 +686,83 @@ const db = firebase.database();
  if (now.getFullYear() === state.year && now.getMonth() === state.month) return now.getDate();
  return 1;
  }
+ function renderSettingsOverlay() {
+ const el = document.getElementById('settingsOverlay');
+ if (!el) return;
+ el.className = 'settings-overlay' + (settingsOpen ? ' open' : '');
+ el.innerHTML = settingsOpen ? `
+ <div class="settings-card">
+ <h2>${t('settingsBtn')}</h2>
+ <div class="auth-field">
+ <label>${t('languageLabel')}</label>
+ <select onchange="__salaryApp.changeLang(this.value)">
+ ${Object.keys(LANG_META).map(code => `<option value="${code}" ${state.settings.lang===code?'selected':''}>${LANG_META[code].name}</option>`).join('')}
+ </select>
+ </div>
+ <div class="auth-field">
+ <label>${t('currencyLabel')}</label>
+ <select onchange="__salaryApp.changeCurrency(this.value)">
+ ${Object.keys(CURRENCIES).map(code => `<option value="${code}" ${state.settings.currency===code?'selected':''}>${code} — ${CURRENCIES[code].symbol} — ${CURRENCIES[code].name}</option>`).join('')}
+ </select>
+ </div>
+ <button class="auth-btn-primary" onclick="__salaryApp.toggleSettings()">${t('done')}</button>
+ </div>
+ ` : '';
+ }
  function render() {
  if (!currentUser) return;
+ document.getElementById('eyebrowText').textContent = t('appEyebrow');
+ document.getElementById('titleText').textContent = t('appTitle');
+ document.getElementById('signOutBtn').textContent = t('signOut');
  document.getElementById('content').innerHTML = `
  <div class="tabs">
- <button class="${view === 'salary' ? 'active' : ''}" onclick="__salaryApp.setView('salary')">Salary</button>
- <button class="${view === 'spending' ? 'active' : ''}" onclick="__salaryApp.setView('spending')">Daily spending</button>
+ <button class="${view === 'salary' ? 'active' : ''}" onclick="__salaryApp.setView('salary')">${t('tabSalary')}</button>
+ <button class="${view === 'spending' ? 'active' : ''}" onclick="__salaryApp.setView('spending')">${t('tabSpending')}</button>
  </div>
  <div class="month-bar">
  <button onclick="__salaryApp.shiftMonth(-1)">‹</button>
- <div class="month-label">${MONTHS[state.month]} ${state.year}</div>
+ <div class="month-label">${monthYearLabel(state.year, state.month)}</div>
  <button onclick="__salaryApp.shiftMonth(1)">›</button>
  </div>
  ${view === 'salary' ? renderSalaryView() : renderSpendingView()}
  <div class="card" style="margin-top: 22px;">
- <h2>History</h2>
+ <h2>${t('historyLabel')}</h2>
  <div id="historyList">${historyHtml()}</div>
  </div>
  `;
+ renderSettingsOverlay();
  }
 
  window.__salaryApp = {
  async loginWithGoogle() {
  const provider = new firebase.auth.GoogleAuthProvider();
- try {
- await auth.signInWithPopup(provider);
- } catch (err) {
- alert(friendlyAuthError(err));
- }
+ try { await auth.signInWithPopup(provider); }
+ catch (err) { alert(friendlyAuthError(err)); }
  },
  async loginGuest() {
- try {
- await auth.signInAnonymously();
- } catch (err) {
- alert("Guest login failed: " + friendlyAuthError(err));
- }
+ try { await auth.signInAnonymously(); }
+ catch (err) { alert("Guest login failed: " + friendlyAuthError(err)); }
  },
  logout() { auth.signOut(); },
 
- setAuthMode(mode) {
- authMode = mode;
- renderAuthScreen();
+ setAuthMode(mode) { authMode = mode; renderAuthScreen(); },
+
+ toggleSettings() {
+ settingsOpen = !settingsOpen;
+ if (currentUser) render(); else renderAuthScreen();
+ },
+ changeLang(code) {
+ state.settings.lang = code;
+ localStorage.setItem('salaryLedgerSettings', JSON.stringify(state.settings));
+ applyDocumentDirection();
+ if (currentUser) db.ref(`users/${currentUser.uid}/settings`).set(state.settings);
+ if (currentUser) render(); else renderAuthScreen();
+ },
+ changeCurrency(code) {
+ state.settings.currency = code;
+ localStorage.setItem('salaryLedgerSettings', JSON.stringify(state.settings));
+ if (currentUser) db.ref(`users/${currentUser.uid}/settings`).set(state.settings);
+ if (currentUser) render(); else renderAuthScreen();
  },
 
  async submitEmailAuth() {
@@ -607,7 +788,6 @@ const db = firebase.database();
  try {
  if (authMode === 'signup') {
  await auth.createUserWithEmailAndPassword(email, password);
- // onAuthStateChanged will now fire and render the app automatically
  } else {
  await auth.signInWithEmailAndPassword(email, password);
  }
