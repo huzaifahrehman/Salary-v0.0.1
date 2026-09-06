@@ -13,538 +13,675 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
-  :root {
-    --ink: #12181F;
-    --ink-2: #1B232D;
-    --paper: #F7F3EA;
-    --brass: #B08D57;
-    --brass-bright: #D4AF6A;
-    --green: #5C8A6E;
-    --rust: #B15A47;
-    --text-hi: #F2EEE3;
-    --text-lo: #9CA6AF;
-    --line: rgba(242,238,227,0.10);
-    --serif: 'Source Serif 4', Georgia, serif;
-    --sans: 'Inter', -apple-system, sans-serif;
-  }
-  * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
-  html, body {
-    margin: 0; padding: 0;
-    background: var(--ink);
-    color: var(--text-hi);
-    font-family: var(--sans);
-    min-height: 100vh;
-  }
-  #app { max-width: 480px; margin: 0 auto; padding: 20px 18px 60px; }
+ :root {
+ --ink: #12181F;
+ --ink-2: #1B232D;
+ --paper: #F7F3EA;
+ --brass: #B08D57;
+ --brass-bright: #D4AF6A;
+ --green: #5C8A6E;
+ --rust: #B15A47;
+ --text-hi: #F2EEE3;
+ --text-lo: #9CA6AF;
+ --line: rgba(242,238,227,0.10);
+ --serif: 'Source Serif 4', Georgia, serif;
+ --sans: 'Inter', -apple-system, sans-serif;
+ }
+ * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+ html, body {
+ margin: 0; padding: 0;
+ background: var(--ink);
+ color: var(--text-hi);
+ font-family: var(--sans);
+ min-height: 100vh;
+ }
+ #app { max-width: 480px; margin: 0 auto; padding: 20px 18px 60px; }
+ /* Header & User Bar */
+ .header { padding: 8px 2px 18px; }
+ .header .eyebrow { font-size: 13px; color: var(--brass-bright); letter-spacing: 0.02em; display: flex; justify-content: space-between; align-items: center; }
+ .header h1 { font-family: var(--serif); font-weight: 600; font-size: 28px; margin: 4px 0 0; }
 
-  /* Header & User Bar */
-  .header { padding: 8px 2px 18px; }
-  .header .eyebrow { font-size: 13px; color: var(--brass-bright); letter-spacing: 0.02em; display: flex; justify-content: space-between; align-items: center; }
-  .header h1 { font-family: var(--serif); font-weight: 600; font-size: 28px; margin: 4px 0 0; }
-  
-  .user-bar {
-    display: flex; align-items: center; justify-content: space-between;
-    background: var(--ink-2); border: 1px solid var(--line); border-radius: 12px;
-    padding: 8px 12px; margin-bottom: 16px; font-size: 13px;
-  }
-  .user-info { display: flex; align-items: center; gap: 8px; overflow: hidden; }
-  .user-avatar { width: 26px; height: 26px; border-radius: 50%; background: var(--brass); color: var(--ink); display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 12px; flex-shrink: 0; }
-  .user-email { color: var(--text-hi); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-  .logout-btn { background: none; border: 1px solid var(--line); color: var(--text-lo); padding: 4px 8px; border-radius: 6px; font-size: 11px; cursor: pointer; }
-  .logout-btn:active { color: var(--rust); border-color: var(--rust); }
+ .user-bar {
+ display: flex; align-items: center; justify-content: space-between;
+ background: var(--ink-2); border: 1px solid var(--line); border-radius: 12px;
+ padding: 8px 12px; margin-bottom: 16px; font-size: 13px;
+ }
+ .user-info { display: flex; align-items: center; gap: 8px; overflow: hidden; }
+ .user-avatar { width: 26px; height: 26px; border-radius: 50%; background: var(--brass); color: var(--ink); display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 12px; flex-shrink: 0; }
+ .user-email { color: var(--text-hi); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+ .logout-btn { background: none; border: 1px solid var(--line); color: var(--text-lo); padding: 4px 8px; border-radius: 6px; font-size: 11px; cursor: pointer; }
+ .logout-btn:active { color: var(--rust); border-color: var(--rust); }
+ /* Auth Screen Card */
+ .auth-card {
+ background: var(--ink-2); border: 1px solid var(--line); border-radius: 20px;
+ padding: 24px; text-align: center; margin-top: 20px;
+ }
+ .auth-card h2 { font-family: var(--serif); font-size: 22px; margin: 0 0 8px; }
+ .auth-card p { font-size: 13.5px; color: var(--text-lo); margin-bottom: 20px; line-height: 1.4; }
 
-  /* Auth Screen Card */
-  .auth-card {
-    background: var(--ink-2); border: 1px solid var(--line); border-radius: 20px;
-    padding: 24px; text-align: center; margin-top: 20px;
-  }
-  .auth-card h2 { font-family: var(--serif); font-size: 22px; margin: 0 0 8px; }
-  .auth-card p { font-size: 13.5px; color: var(--text-lo); margin-bottom: 20px; line-height: 1.4; }
-  .auth-btn-google {
-    width: 100%; padding: 13px; border-radius: 10px; border: 1px solid var(--line);
-    background: var(--brass); color: var(--ink); font-weight: 700; font-size: 14.5px; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px; margin-bottom: 10px;
-  }
-  .auth-btn-guest {
-    width: 100%; padding: 12px; border-radius: 10px; border: 1px solid var(--line);
-    background: var(--ink); color: var(--text-hi); font-weight: 600; font-size: 14px; cursor: pointer;
-  }
+ /* Auth mode tabs (Sign in / Create account) */
+ .auth-tabs { display: flex; background: var(--ink); border: 1px solid var(--line); border-radius: 12px; padding: 4px; margin-bottom: 18px; }
+ .auth-tabs button { flex: 1; padding: 9px 0; border: none; border-radius: 8px; background: none; color: var(--text-lo); font-family: var(--sans); font-weight: 600; font-size: 13.5px; cursor: pointer; }
+ .auth-tabs button.active { background: var(--brass); color: var(--ink); }
 
-  /* Tabs */
-  .tabs {
-    display: flex; background: var(--ink-2); border: 1px solid var(--line);
-    border-radius: 14px; padding: 4px; margin-bottom: 16px;
-  }
-  .tabs button {
-    flex: 1; padding: 10px 0; border: none; border-radius: 10px; background: none;
-    color: var(--text-lo); font-family: var(--sans); font-weight: 600; font-size: 14px; cursor: pointer;
-  }
-  .tabs button.active { background: var(--brass); color: var(--ink); }
+ .auth-field { text-align: left; margin-bottom: 12px; }
+ .auth-field label { display: block; font-size: 12px; color: var(--text-lo); margin-bottom: 5px; }
+ .auth-field input { width: 100%; background: var(--ink); border: 1px solid var(--line); border-radius: 10px; color: var(--text-hi); font-family: var(--sans); font-size: 14.5px; padding: 11px 12px; }
+ .auth-field input::placeholder { color: var(--text-lo); }
+ .auth-field input:focus { outline: none; border-color: var(--brass); }
 
-  /* Month switcher */
-  .month-bar {
-    display: flex; align-items: center; justify-content: space-between;
-    background: var(--ink-2); border: 1px solid var(--line); border-radius: 14px;
-    padding: 10px 8px; margin-bottom: 16px;
-  }
-  .month-bar button {
-    background: none; border: none; color: var(--text-hi); font-size: 20px;
-    width: 40px; height: 40px; border-radius: 10px; cursor: pointer;
-  }
-  .month-bar button:active { background: var(--line); }
-  .month-label { font-family: var(--serif); font-size: 17px; font-weight: 600; }
+ .auth-error { background: rgba(177,90,71,0.12); border: 1px solid rgba(177,90,71,0.4); color: #E8A79A; font-size: 12.5px; border-radius: 10px; padding: 9px 11px; margin-bottom: 12px; text-align: left; display: none; line-height: 1.4; }
+ .auth-error.show { display: block; }
 
-  /* Hero card */
-  .hero {
-    background: linear-gradient(155deg, #1E2733, var(--ink-2));
-    border: 1px solid var(--line); border-radius: 20px; padding: 26px 22px;
-    margin-bottom: 16px; position: relative; overflow: hidden;
-  }
-  .hero::after {
-    content: ''; position: absolute; right: -40px; top: -40px; width: 140px; height: 140px;
-    border-radius: 50%; background: radial-gradient(circle, rgba(176,141,87,0.18), transparent 70%);
-  }
-  .hero .label { font-size: 13px; color: var(--text-lo); margin-bottom: 6px; }
-  .hero .amount { font-family: var(--serif); font-size: 42px; font-weight: 700; color: var(--brass-bright); line-height: 1.1; }
-  .hero .sub { font-size: 13px; color: var(--text-lo); margin-top: 10px; display: flex; gap: 16px; flex-wrap: wrap; }
-  .hero .sub span b { color: var(--text-hi); font-weight: 600; }
+ .auth-success { background: rgba(92,138,110,0.12); border: 1px solid rgba(92,138,110,0.4); color: #A9CBB4; font-size: 12.5px; border-radius: 10px; padding: 9px 11px; margin-bottom: 12px; text-align: left; display: none; line-height: 1.4; }
+ .auth-success.show { display: block; }
 
-  /* Section cards */
-  .card { background: var(--ink-2); border: 1px solid var(--line); border-radius: 16px; padding: 16px; margin-bottom: 14px; }
-  .card h2 { font-family: var(--serif); font-weight: 600; font-size: 16px; margin: 0 0 12px; display: flex; align-items: center; justify-content: space-between; }
-  .card h2 .add-btn { font-family: var(--sans); font-size: 13px; color: var(--brass-bright); background: none; border: none; cursor: pointer; padding: 4px 8px; }
+ .auth-btn-primary {
+ width: 100%; padding: 13px; border-radius: 10px; border: none;
+ background: var(--brass); color: var(--ink); font-weight: 700; font-size: 14.5px; cursor: pointer;
+ margin-bottom: 10px; font-family: var(--sans);
+ }
+ .auth-btn-primary:active { background: var(--brass-bright); }
+ .auth-btn-primary:disabled { opacity: 0.6; cursor: default; }
 
-  .row { display: flex; align-items: center; gap: 10px; padding: 8px 0; border-bottom: 1px solid var(--line); }
-  .row:last-child { border-bottom: none; }
-  .row input[type="text"] { flex: 1; background: none; border: none; color: var(--text-hi); font-family: var(--sans); font-size: 14.5px; padding: 6px 0; min-width: 0; }
-  .row input[type="text"]::placeholder { color: var(--text-lo); }
-  .row .amt-wrap { display: flex; align-items: center; gap: 2px; flex-shrink: 0; }
-  .row .amt-wrap span { color: var(--text-lo); font-size: 14px; }
-  .row input[type="number"] { width: 88px; background: none; border: none; color: var(--text-hi); font-family: var(--sans); font-size: 14.5px; text-align: right; padding: 6px 0; }
-  .row input[type="number"]::-webkit-outer-spin-button, .row input[type="number"]::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
-  .row .del { background: none; border: none; color: var(--text-lo); font-size: 17px; width: 26px; height: 26px; cursor: pointer; flex-shrink: 0; }
-  .row .del:active { color: var(--rust); }
+ .auth-forgot { background: none; border: none; color: var(--text-lo); font-size: 12.5px; cursor: pointer; text-decoration: underline; padding: 0 0 16px; }
+ .auth-forgot:active { color: var(--brass-bright); }
 
-  .card .total-row { display: flex; justify-content: space-between; padding-top: 12px; margin-top: 4px; font-weight: 600; font-size: 15px; }
-  .card.deductions .total-row .val { color: var(--rust); }
-  .card.earnings .total-row .val { color: var(--green); }
-  .card.spending .total-row .val { color: var(--rust); }
+ .auth-divider { display: flex; align-items: center; gap: 10px; margin: 4px 0 16px; color: var(--text-lo); font-size: 11.5px; }
+ .auth-divider::before, .auth-divider::after { content: ''; flex: 1; height: 1px; background: var(--line); }
 
-  /* Save button */
-  .save-btn { width: 100%; padding: 15px; border-radius: 14px; border: none; background: var(--brass); color: var(--ink); font-family: var(--sans); font-weight: 700; font-size: 15px; cursor: pointer; margin-top: 4px; }
-  .save-btn:active { background: var(--brass-bright); }
-  .save-msg { text-align: center; font-size: 13px; color: var(--green); height: 18px; margin-top: 8px; opacity: 0; transition: opacity 0.3s; }
-  .save-msg.show { opacity: 1; }
-
-  /* Expense entry form */
-  .expense-form { display: flex; gap: 8px; margin-bottom: 12px; align-items: center; }
-  .expense-form .day-input { width: 48px; background: var(--ink); border: 1px solid var(--line); border-radius: 8px; color: var(--text-hi); font-size: 14px; text-align: center; padding: 8px 4px; }
-  .expense-form .note-input { flex: 1; background: var(--ink); border: 1px solid var(--line); border-radius: 8px; color: var(--text-hi); font-size: 14px; padding: 8px 10px; min-width: 0; }
-  .expense-form .amt-input { width: 78px; background: var(--ink); border: 1px solid var(--line); border-radius: 8px; color: var(--text-hi); font-size: 14px; text-align: right; padding: 8px 8px; }
-  .expense-form input::placeholder { color: var(--text-lo); }
-  .expense-form .add-expense-btn { background: var(--brass); border: none; color: var(--ink); border-radius: 8px; width: 38px; height: 38px; font-size: 18px; font-weight: 700; cursor: pointer; flex-shrink: 0; }
-
-  .expense-row { display: flex; align-items: center; gap: 10px; padding: 10px 0; border-bottom: 1px solid var(--line); }
-  .expense-row:last-child { border-bottom: none; }
-  .expense-row .day-badge { width: 34px; height: 34px; border-radius: 9px; background: var(--ink); display: flex; align-items: center; justify-content: center; font-family: var(--serif); font-size: 13px; color: var(--text-lo); flex-shrink: 0; }
-  .expense-row .note { flex: 1; font-size: 14px; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-  .expense-row .amt { font-size: 14.5px; font-weight: 600; color: var(--rust); flex-shrink: 0; }
-  .expense-row .del { background: none; border: none; color: var(--text-lo); font-size: 16px; cursor: pointer; flex-shrink: 0; width: 24px; }
-
-  /* History */
-  .history-item { display: flex; justify-content: space-between; align-items: center; padding: 12px 4px; border-bottom: 1px solid var(--line); cursor: pointer; }
-  .history-item:last-child { border-bottom: none; }
-  .history-item .h-left .h-month { font-size: 14.5px; font-weight: 500; }
-  .history-item .h-left .h-sub { font-size: 12px; color: var(--text-lo); margin-top: 2px; }
-  .history-item .h-net { font-family: var(--serif); font-size: 16px; font-weight: 600; color: var(--brass-bright); }
-  .empty-state { color: var(--text-lo); font-size: 13.5px; padding: 6px 4px 2px; line-height: 1.5; }
-
-  .loading { text-align: center; color: var(--text-lo); padding: 40px 0; font-size: 14px; }
+ .auth-btn-google {
+ width: 100%; padding: 13px; border-radius: 10px; border: 1px solid var(--line);
+ background: var(--brass); color: var(--ink); font-weight: 700; font-size: 14.5px; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px; margin-bottom: 10px;
+ }
+ .auth-btn-guest {
+ width: 100%; padding: 12px; border-radius: 10px; border: 1px solid var(--line);
+ background: var(--ink); color: var(--text-hi); font-weight: 600; font-size: 14px; cursor: pointer;
+ }
+ /* Tabs */
+ .tabs {
+ display: flex; background: var(--ink-2); border: 1px solid var(--line);
+ border-radius: 14px; padding: 4px; margin-bottom: 16px;
+ }
+ .tabs button {
+ flex: 1; padding: 10px 0; border: none; border-radius: 10px; background: none;
+ color: var(--text-lo); font-family: var(--sans); font-weight: 600; font-size: 14px; cursor: pointer;
+ }
+ .tabs button.active { background: var(--brass); color: var(--ink); }
+ /* Month switcher */
+ .month-bar {
+ display: flex; align-items: center; justify-content: space-between;
+ background: var(--ink-2); border: 1px solid var(--line); border-radius: 14px;
+ padding: 10px 8px; margin-bottom: 16px;
+ }
+ .month-bar button {
+ background: none; border: none; color: var(--text-hi); font-size: 20px;
+ width: 40px; height: 40px; border-radius: 10px; cursor: pointer;
+ }
+ .month-bar button:active { background: var(--line); }
+ .month-label { font-family: var(--serif); font-size: 17px; font-weight: 600; }
+ /* Hero card */
+ .hero {
+ background: linear-gradient(155deg, #1E2733, var(--ink-2));
+ border: 1px solid var(--line); border-radius: 20px; padding: 26px 22px;
+ margin-bottom: 16px; position: relative; overflow: hidden;
+ }
+ .hero::after {
+ content: ''; position: absolute; right: -40px; top: -40px; width: 140px; height: 140px;
+ border-radius: 50%; background: radial-gradient(circle, rgba(176,141,87,0.18), transparent 70%);
+ }
+ .hero .label { font-size: 13px; color: var(--text-lo); margin-bottom: 6px; }
+ .hero .amount { font-family: var(--serif); font-size: 42px; font-weight: 700; color: var(--brass-bright); line-height: 1.1; }
+ .hero .sub { font-size: 13px; color: var(--text-lo); margin-top: 10px; display: flex; gap: 16px; flex-wrap: wrap; }
+ .hero .sub span b { color: var(--text-hi); font-weight: 600; }
+ /* Section cards */
+ .card { background: var(--ink-2); border: 1px solid var(--line); border-radius: 16px; padding: 16px; margin-bottom: 14px; }
+ .card h2 { font-family: var(--serif); font-weight: 600; font-size: 16px; margin: 0 0 12px; display: flex; align-items: center; justify-content: space-between; }
+ .card h2 .add-btn { font-family: var(--sans); font-size: 13px; color: var(--brass-bright); background: none; border: none; cursor: pointer; padding: 4px 8px; }
+ .row { display: flex; align-items: center; gap: 10px; padding: 8px 0; border-bottom: 1px solid var(--line); }
+ .row:last-child { border-bottom: none; }
+ .row input[type="text"] { flex: 1; background: none; border: none; color: var(--text-hi); font-family: var(--sans); font-size: 14.5px; padding: 6px 0; min-width: 0; }
+ .row input[type="text"]::placeholder { color: var(--text-lo); }
+ .row .amt-wrap { display: flex; align-items: center; gap: 2px; flex-shrink: 0; }
+ .row .amt-wrap span { color: var(--text-lo); font-size: 14px; }
+ .row input[type="number"] { width: 88px; background: none; border: none; color: var(--text-hi); font-family: var(--sans); font-size: 14.5px; text-align: right; padding: 6px 0; }
+ .row input[type="number"]::-webkit-outer-spin-button, .row input[type="number"]::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+ .row .del { background: none; border: none; color: var(--text-lo); font-size: 17px; width: 26px; height: 26px; cursor: pointer; flex-shrink: 0; }
+ .row .del:active { color: var(--rust); }
+ .card .total-row { display: flex; justify-content: space-between; padding-top: 12px; margin-top: 4px; font-weight: 600; font-size: 15px; }
+ .card.deductions .total-row .val { color: var(--rust); }
+ .card.earnings .total-row .val { color: var(--green); }
+ .card.spending .total-row .val { color: var(--rust); }
+ /* Save button */
+ .save-btn { width: 100%; padding: 15px; border-radius: 14px; border: none; background: var(--brass); color: var(--ink); font-family: var(--sans); font-weight: 700; font-size: 15px; cursor: pointer; margin-top: 4px; }
+ .save-btn:active { background: var(--brass-bright); }
+ .save-msg { text-align: center; font-size: 13px; color: var(--green); height: 18px; margin-top: 8px; opacity: 0; transition: opacity 0.3s; }
+ .save-msg.show { opacity: 1; }
+ /* Expense entry form */
+ .expense-form { display: flex; gap: 8px; margin-bottom: 12px; align-items: center; }
+ .expense-form .day-input { width: 48px; background: var(--ink); border: 1px solid var(--line); border-radius: 8px; color: var(--text-hi); font-size: 14px; text-align: center; padding: 8px 4px; }
+ .expense-form .note-input { flex: 1; background: var(--ink); border: 1px solid var(--line); border-radius: 8px; color: var(--text-hi); font-size: 14px; padding: 8px 10px; min-width: 0; }
+ .expense-form .amt-input { width: 78px; background: var(--ink); border: 1px solid var(--line); border-radius: 8px; color: var(--text-hi); font-size: 14px; text-align: right; padding: 8px 8px; }
+ .expense-form input::placeholder { color: var(--text-lo); }
+ .expense-form .add-expense-btn { background: var(--brass); border: none; color: var(--ink); border-radius: 8px; width: 38px; height: 38px; font-size: 18px; font-weight: 700; cursor: pointer; flex-shrink: 0; }
+ .expense-row { display: flex; align-items: center; gap: 10px; padding: 10px 0; border-bottom: 1px solid var(--line); }
+ .expense-row:last-child { border-bottom: none; }
+ .expense-row .day-badge { width: 34px; height: 34px; border-radius: 9px; background: var(--ink); display: flex; align-items: center; justify-content: center; font-family: var(--serif); font-size: 13px; color: var(--text-lo); flex-shrink: 0; }
+ .expense-row .note { flex: 1; font-size: 14px; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+ .expense-row .amt { font-size: 14.5px; font-weight: 600; color: var(--rust); flex-shrink: 0; }
+ .expense-row .del { background: none; border: none; color: var(--text-lo); font-size: 16px; cursor: pointer; flex-shrink: 0; width: 24px; }
+ /* History */
+ .history-item { display: flex; justify-content: space-between; align-items: center; padding: 12px 4px; border-bottom: 1px solid var(--line); cursor: pointer; }
+ .history-item:last-child { border-bottom: none; }
+ .history-item .h-left .h-month { font-size: 14.5px; font-weight: 500; }
+ .history-item .h-left .h-sub { font-size: 12px; color: var(--text-lo); margin-top: 2px; }
+ .history-item .h-net { font-family: var(--serif); font-size: 16px; font-weight: 600; color: var(--brass-bright); }
+ .empty-state { color: var(--text-lo); font-size: 13.5px; padding: 6px 4px 2px; line-height: 1.5; }
+ .loading { text-align: center; color: var(--text-lo); padding: 40px 0; font-size: 14px; }
 </style>
-
-<!-- Firebase SDKs -->
-<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
+<!-- Firebase SDKs (compat build — required because this app uses the global `firebase` object) -->
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js" onerror="window.__fbLoadFailed=true"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js" onerror="window.__fbLoadFailed=true"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js" onerror="window.__fbLoadFailed=true"></script>
 </head>
 <body>
 <div id="app">
-  <div class="header">
-    <div class="eyebrow">
-      <span>Salary Ledger</span>
-      <span id="syncBadge" style="font-size: 11px; color: var(--green); display: none;">● Connected</span>
-    </div>
-    <h1>Your pay, tracked</h1>
-  </div>
-  
-  <div id="userBar" class="user-bar" style="display: none;">
-    <div class="user-info">
-      <div id="userAvatar" class="user-avatar">U</div>
-      <div id="userEmail" class="user-email">user@email.com</div>
-    </div>
-    <button class="logout-btn" onclick="__salaryApp.logout()">Sign out</button>
-  </div>
+ <div class="header">
+ <div class="eyebrow">
+ <span>Salary Ledger</span>
+ <span id="syncBadge" style="font-size: 11px; color: var(--green); display: none;">● Connected</span>
+ </div>
+ <h1>Your pay, tracked</h1>
+ </div>
 
-  <div id="content" class="loading">Initializing app…</div>
+ <div id="userBar" class="user-bar" style="display: none;">
+ <div class="user-info">
+ <div id="userAvatar" class="user-avatar">U</div>
+ <div id="userEmail" class="user-email">user@email.com</div>
+ </div>
+ <button class="logout-btn" onclick="__salaryApp.logout()">Sign out</button>
+ </div>
+ <div id="content" class="loading">Initializing app…</div>
 </div>
-
 <script>
 // Credentials for your Firebase project: salary-v01
 const firebaseConfig = {
-  apiKey: "AIzaSyDWA7TFeiaWWNy6I5fmU8Pd2MJlXkgSBX0",
-  authDomain: "salary-v01.firebaseapp.com",
-  databaseURL: "https://salary-v01-default-rtdb.firebaseio.com",
-  projectId: "salary-v01",
-  storageBucket: "salary-v01.firebasestorage.app",
-  messagingSenderId: "850709546111",
-  appId: "1:850709546111:web:dc412616cd42b934332b4a"
+ apiKey: "AIzaSyDWA7TFeiaWWNy6I5fmU8Pd2MJlXkgSBX0",
+ authDomain: "salary-v01.firebaseapp.com",
+ databaseURL: "https://salary-v01-default-rtdb.firebaseio.com",
+ projectId: "salary-v01",
+ storageBucket: "salary-v01.firebasestorage.app",
+ messagingSenderId: "850709546111",
+ appId: "1:850709546111:web:dc412616cd42b934332b4a"
 };
+// Guard: if the SDK scripts above failed to load (blocked network, ad blocker,
+// offline CDN, or a stray <script type="module"> import elsewhere on the page
+// that shadows the global), `firebase` will be undefined. Fail loudly with a
+// message in the UI instead of a silent white screen + console error.
+if (typeof firebase === 'undefined' || window.__fbLoadFailed) {
+ document.addEventListener('DOMContentLoaded', function () {
+ var el = document.getElementById('content');
+ if (el) {
+ el.className = '';
+ el.innerHTML =
+ '<div class="auth-card">' +
+ '<h2>Couldn\'t load Firebase</h2>' +
+ '<p style="color:#E8A79A; text-align:left;">' +
+ 'The Firebase SDK scripts didn\'t load, so the app can\'t start. This is usually one of:<br><br>' +
+ '1) Your internet connection or an ad blocker is blocking gstatic.com — try another network or an incognito window.<br><br>' +
+ '2) Something else on this page loads the "modular" Firebase SDK (an <code>import ... from "firebase/app"</code> line) instead of, or after, the three compat &lt;script&gt; tags. Only the compat tags belong in this file.<br><br>' +
+ '3) The three compat &lt;script&gt; tags were edited, removed, or reordered below the app\'s own script.' +
+ '</p>' +
+ '</div>';
+ }
+ });
+ throw new Error('Firebase SDK not loaded — see message rendered in #content.');
+}
 
 firebase.initializeApp(firebaseConfig);
 const auth = firebase.auth();
 const db = firebase.database();
-
 (function() {
-  const MONTHS = ["January","February","March","April","May","June","July","August","September","October","November","December"];
+ const MONTHS = ["January","February","March","April","May","June","July","August","September","October","November","December"];
+ let currentUser = null;
+ let view = 'salary';
+ let authMode = 'signin'; // 'signin' | 'signup'
+ let state = {
+ year: new Date().getFullYear(),
+ month: new Date().getMonth(),
+ earnings: [{ name: "Basic pay", amount: 0 }],
+ deductions: [],
+ expenses: []
+ };
+ let history = [];
+ let monthListener = null;
+ let historyListener = null;
 
-  let currentUser = null;
-  let view = 'salary';
-  let state = {
-    year: new Date().getFullYear(),
-    month: new Date().getMonth(),
-    earnings: [{ name: "Basic pay", amount: 0 }],
-    deductions: [],
-    expenses: []
-  };
-  let history = [];
-  let monthListener = null;
-  let historyListener = null;
+ function monthPath(uid, year, month) {
+ return `users/${uid}/ledger/${year}-${String(month+1).padStart(2,'0')}`;
+ }
+ function fmt(n) {
+ const v = Number(n) || 0;
+ return v.toLocaleString(undefined, { maximumFractionDigits: 2 });
+ }
+ function sum(arr) { return arr ? arr.reduce((a,b) => a + (Number(b.amount) || 0), 0) : 0; }
+ function daysInMonth(year, month) { return new Date(year, month + 1, 0).getDate(); }
 
-  function monthPath(uid, year, month) {
-    return `users/${uid}/ledger/${year}-${String(month+1).padStart(2,'0')}`;
-  }
+ // Turns Firebase's auth error codes into messages a human can act on
+ function friendlyAuthError(err) {
+ const code = err && err.code ? err.code : '';
+ switch (code) {
+ case 'auth/invalid-login-credentials':
+ case 'auth/invalid-credential':
+ case 'auth/wrong-password':
+ case 'auth/user-not-found':
+ return "That email and password don't match an existing account. If you're new here, switch to \"Create account\" below.";
+ case 'auth/email-already-in-use':
+ return "An account already exists with that email. Try signing in instead.";
+ case 'auth/weak-password':
+ return "Password is too weak — please use at least 6 characters.";
+ case 'auth/invalid-email':
+ return "That doesn't look like a valid email address.";
+ case 'auth/missing-password':
+ return "Please enter a password.";
+ case 'auth/too-many-requests':
+ return "Too many attempts. Please wait a bit and try again.";
+ case 'auth/network-request-failed':
+ return "Network error — check your connection and try again.";
+ case 'auth/operation-not-allowed':
+ return "Email/Password sign-in isn't enabled for this project yet. Enable it in the Firebase Console under Authentication → Sign-in method.";
+ default:
+ return err && err.message ? err.message : "Something went wrong. Please try again.";
+ }
+ }
 
-  function fmt(n) {
-    const v = Number(n) || 0;
-    return v.toLocaleString(undefined, { maximumFractionDigits: 2 });
-  }
-  function sum(arr) { return arr ? arr.reduce((a,b) => a + (Number(b.amount) || 0), 0) : 0; }
-  function daysInMonth(year, month) { return new Date(year, month + 1, 0).getDate(); }
+ // Observe Firebase Auth state changes
+ auth.onAuthStateChanged((user) => {
+ currentUser = user;
+ if (user) {
+ document.getElementById('userBar').style.display = 'flex';
+ document.getElementById('syncBadge').style.display = 'inline';
 
-  // Observe Firebase Auth state changes
-  auth.onAuthStateChanged((user) => {
-    currentUser = user;
-    if (user) {
-      document.getElementById('userBar').style.display = 'flex';
-      document.getElementById('syncBadge').style.display = 'inline';
-      
-      if (user.isAnonymous) {
-        document.getElementById('userEmail').textContent = 'Guest User (Local Device)';
-        document.getElementById('userAvatar').textContent = 'G';
-      } else {
-        document.getElementById('userEmail').textContent = user.email || 'Google User';
-        document.getElementById('userAvatar').textContent = (user.email || 'U').charAt(0).toUpperCase();
-      }
+ if (user.isAnonymous) {
+ document.getElementById('userEmail').textContent = 'Guest User (Local Device)';
+ document.getElementById('userAvatar').textContent = 'G';
+ } else {
+ document.getElementById('userEmail').textContent = user.email || 'Google User';
+ document.getElementById('userAvatar').textContent = (user.email || 'U').charAt(0).toUpperCase();
+ }
+ listenToMonth(state.year, state.month);
+ listenToHistory();
+ } else {
+ document.getElementById('userBar').style.display = 'none';
+ document.getElementById('syncBadge').style.display = 'none';
+ if (monthListener) monthListener.off();
+ if (historyListener) historyListener.off();
+ renderAuthScreen();
+ }
+ });
 
-      listenToMonth(state.year, state.month);
-      listenToHistory();
-    } else {
-      document.getElementById('userBar').style.display = 'none';
-      document.getElementById('syncBadge').style.display = 'none';
-      if (monthListener) monthListener.off();
-      if (historyListener) historyListener.off();
-      renderAuthScreen();
-    }
-  });
+ function listenToMonth(year, month) {
+ if (!currentUser) return;
+ if (monthListener) monthListener.off();
+ const path = monthPath(currentUser.uid, year, month);
+ monthListener = db.ref(path);
+ monthListener.on('value', (snapshot) => {
+ const data = snapshot.val();
+ if (data) {
+ state.earnings = data.earnings || [{ name: "Basic pay", amount: 0 }];
+ state.deductions = data.deductions || [];
+ state.expenses = (data.expenses || []).sort((a,b) => a.day - b.day);
+ } else {
+ state.earnings = [{ name: "Basic pay", amount: 0 }];
+ state.deductions = [];
+ state.expenses = [];
+ }
+ render();
+ });
+ }
+ function listenToHistory() {
+ if (!currentUser) return;
+ if (historyListener) historyListener.off();
+ historyListener = db.ref(`users/${currentUser.uid}/ledger`);
+ historyListener.on('value', (snapshot) => {
+ const data = snapshot.val() || {};
+ const items = [];
+ Object.keys(data).forEach((key) => {
+ const [y, m] = key.split('-').map(Number);
+ const monthData = data[key];
+ const gross = sum(monthData.earnings);
+ const ded = sum(monthData.deductions);
+ const spent = sum(monthData.expenses);
+ items.push({ key, year: y, month: m - 1, gross, ded, spent, net: gross - ded });
+ });
+ items.sort((a,b) => (b.year - a.year) || (b.month - a.month));
+ history = items;
+ render();
+ });
+ }
+ function saveSalary() {
+ if (!currentUser) return;
+ const path = monthPath(currentUser.uid, state.year, state.month);
+ db.ref(path).update({
+ year: state.year,
+ month: state.month,
+ earnings: state.earnings,
+ deductions: state.deductions
+ });
+ flashMsg();
+ }
+ function saveExpenses() {
+ if (!currentUser) return;
+ const path = monthPath(currentUser.uid, state.year, state.month);
+ db.ref(path).update({
+ year: state.year,
+ month: state.month,
+ expenses: state.expenses
+ });
+ }
+ function flashMsg() {
+ const msg = document.getElementById('saveMsg');
+ if (msg) {
+ msg.classList.add('show');
+ setTimeout(() => msg.classList.remove('show'), 1800);
+ }
+ }
 
-  function listenToMonth(year, month) {
-    if (!currentUser) return;
-    if (monthListener) monthListener.off();
+ function renderAuthScreen() {
+ const isSignup = authMode === 'signup';
+ document.getElementById('content').innerHTML = `
+ <div class="auth-card">
+ <h2>Welcome to Salary Ledger</h2>
+ <p>Sign in to sync across devices, or use Guest Mode for local device storage.</p>
 
-    const path = monthPath(currentUser.uid, year, month);
-    monthListener = db.ref(path);
+ <div class="auth-tabs">
+ <button class="${!isSignup ? 'active' : ''}" onclick="__salaryApp.setAuthMode('signin')">Sign In</button>
+ <button class="${isSignup ? 'active' : ''}" onclick="__salaryApp.setAuthMode('signup')">Create Account</button>
+ </div>
 
-    monthListener.on('value', (snapshot) => {
-      const data = snapshot.val();
-      if (data) {
-        state.earnings = data.earnings || [{ name: "Basic pay", amount: 0 }];
-        state.deductions = data.deductions || [];
-        state.expenses = (data.expenses || []).sort((a,b) => a.day - b.day);
-      } else {
-        state.earnings = [{ name: "Basic pay", amount: 0 }];
-        state.deductions = [];
-        state.expenses = [];
-      }
-      render();
-    });
-  }
+ <div class="auth-error" id="authError"></div>
+ <div class="auth-success" id="authSuccess"></div>
 
-  function listenToHistory() {
-    if (!currentUser) return;
-    if (historyListener) historyListener.off();
+ <div class="auth-field">
+ <label for="authEmail">Email</label>
+ <input type="email" id="authEmail" placeholder="you@example.com" autocomplete="email">
+ </div>
+ <div class="auth-field">
+ <label for="authPassword">Password</label>
+ <input type="password" id="authPassword" placeholder="${isSignup ? 'At least 6 characters' : 'Your password'}" autocomplete="${isSignup ? 'new-password' : 'current-password'}">
+ </div>
 
-    historyListener = db.ref(`users/${currentUser.uid}/ledger`);
-    historyListener.on('value', (snapshot) => {
-      const data = snapshot.val() || {};
-      const items = [];
+ <button class="auth-btn-primary" id="authSubmitBtn" onclick="__salaryApp.submitEmailAuth()">
+ ${isSignup ? 'Create Account' : 'Sign In'}
+ </button>
 
-      Object.keys(data).forEach((key) => {
-        const [y, m] = key.split('-').map(Number);
-        const monthData = data[key];
-        const gross = sum(monthData.earnings);
-        const ded = sum(monthData.deductions);
-        const spent = sum(monthData.expenses);
+ ${isSignup ? '' : '<button class="auth-forgot" onclick="__salaryApp.resetPassword()">Forgot password?</button>'}
 
-        items.push({
-          key, year: y, month: m - 1, gross, ded, spent, net: gross - ded
-        });
-      });
+ <div class="auth-divider">or</div>
 
-      items.sort((a,b) => (b.year - a.year) || (b.month - a.month));
-      history = items;
-      render();
-    });
-  }
+ <button class="auth-btn-google" onclick="__salaryApp.loginWithGoogle()">
+ <svg width="18" height="18" viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z"/></svg>
+ Continue with Google
+ </button>
+ <button class="auth-btn-guest" onclick="__salaryApp.loginGuest()">
+ Continue as Guest (Local Only)
+ </button>
+ </div>
+ `;
 
-  function saveSalary() {
-    if (!currentUser) return;
-    const path = monthPath(currentUser.uid, state.year, state.month);
-    db.ref(path).update({
-      year: state.year,
-      month: state.month,
-      earnings: state.earnings,
-      deductions: state.deductions
-    });
-    flashMsg();
-  }
+ // Let Enter key submit the form from either field
+ const emailEl = document.getElementById('authEmail');
+ const passEl = document.getElementById('authPassword');
+ [emailEl, passEl].forEach(el => {
+ el.addEventListener('keydown', (e) => {
+ if (e.key === 'Enter') __salaryApp.submitEmailAuth();
+ });
+ });
+ }
 
-  function saveExpenses() {
-    if (!currentUser) return;
-    const path = monthPath(currentUser.uid, state.year, state.month);
-    db.ref(path).update({
-      year: state.year,
-      month: state.month,
-      expenses: state.expenses
-    });
-  }
+ function renderSalaryView() {
+ const gross = sum(state.earnings);
+ const ded = sum(state.deductions);
+ const net = gross - ded;
+ return `
+ <div class="hero">
+ <div class="label" id="heroLabel">Net pay this month</div>
+ <div class="amount">Rs <span id="netAmount">${fmt(net)}</span></div>
+ <div class="sub">
+ <span>Gross <b id="grossVal">${fmt(gross)}</b></span>
+ <span>Deductions <b id="dedVal">${fmt(ded)}</b></span>
+ </div>
+ </div>
+ <div class="card earnings">
+ <h2>Earnings <button class="add-btn" onclick="__salaryApp.add('earnings')">+ Add line</button></h2>
+ <div id="earningsRows">${rowsHtml('earnings')}</div>
+ <div class="total-row"><span>Total earnings</span><span class="val">Rs <span id="earnTotal">${fmt(gross)}</span></span></div>
+ </div>
+ <div class="card deductions">
+ <h2>Deductions <button class="add-btn" onclick="__salaryApp.add('deductions')">+ Add line</button></h2>
+ <div id="deductionsRows">${rowsHtml('deductions')}</div>
+ <div class="total-row"><span>Total deductions</span><span class="val">Rs <span id="dedTotal">${fmt(ded)}</span></span></div>
+ </div>
+ <button class="save-btn" onclick="__salaryApp.save()">Save ${MONTHS[state.month]} ${state.year}</button>
+ <div class="save-msg" id="saveMsg">Saved securely to cloud</div>
+ `;
+ }
+ function renderSpendingView() {
+ const gross = sum(state.earnings);
+ const ded = sum(state.deductions);
+ const net = gross - ded;
+ const spent = sum(state.expenses);
+ const remaining = net - spent;
+ return `
+ <div class="hero">
+ <div class="label" id="heroLabel">Remaining after spending</div>
+ <div class="amount">Rs <span id="netAmount">${fmt(remaining)}</span></div>
+ <div class="sub">
+ <span>Net pay <b id="grossVal">${fmt(net)}</b></span>
+ <span>Spent so far <b id="dedVal">${fmt(spent)}</b></span>
+ </div>
+ </div>
+ <div class="card spending">
+ <h2>Add an expense</h2>
+ <div class="expense-form">
+ <input type="number" class="day-input" id="expDay" min="1" max="${daysInMonth(state.year, state.month)}" value="${todayDefaultDay()}" placeholder="Day">
+ <input type="text" class="note-input" id="expNote" placeholder="What did you spend on?">
+ <input type="number" class="amt-input" id="expAmt" placeholder="Rs">
+ <button class="add-expense-btn" onclick="__salaryApp.addExpense()" aria-label="Add expense">+</button>
+ </div>
+ </div>
+ <div class="card spending">
+ <h2>${MONTHS[state.month]} spending</h2>
+ <div id="expenseRows">${expenseRowsHtml()}</div>
+ <div class="total-row"><span>Total spent</span><span class="val">Rs <span id="spentTotal">${fmt(spent)}</span></span></div>
+ </div>
+ <div class="save-msg show" style="color: var(--text-lo);" id="remainingNote">Rs <span id="remainingVal">${fmt(remaining)}</span> left of this month's net pay</div>
+ `;
+ }
+ function rowsHtml(type) {
+ return state[type].map((item, idx) => `
+ <div class="row">
+ <input type="text" placeholder="${type === 'earnings' ? 'e.g. Basic salary' : 'e.g. Provident fund'}"
+ value="${(item.name || '').replace(/"/g,'&quot;')}"
+ oninput="__salaryApp.setName('${type}', ${idx}, this.value)">
+ <div class="amt-wrap">
+ <span>Rs</span>
+ <input type="number" inputmode="decimal" value="${item.amount || ''}" placeholder="0"
+ oninput="__salaryApp.setAmount('${type}', ${idx}, this.value)">
+ </div>
+ <button class="del" onclick="__salaryApp.remove('${type}', ${idx})" aria-label="Remove">✕</button>
+ </div>
+ `).join('');
+ }
+ function expenseRowsHtml() {
+ if (!state.expenses.length) return `<div class="empty-state">No spending logged for ${MONTHS[state.month]}.</div>`;
+ return state.expenses.map((item) => `
+ <div class="expense-row">
+ <div class="day-badge">${item.day}</div>
+ <div class="note">${(item.note || 'Expense').replace(/</g,'&lt;')}</div>
+ <div class="amt">Rs ${fmt(item.amount)}</div>
+ <button class="del" onclick="__salaryApp.removeExpense('${item.id}')" aria-label="Remove">✕</button>
+ </div>
+ `).join('');
+ }
+ function historyHtml() {
+ if (!history.length) return `<div class="empty-state">No saved months yet.</div>`;
+ return history.map(h => `
+ <div class="history-item" onclick="__salaryApp.goTo(${h.year}, ${h.month})">
+ <div class="h-left">
+ <div class="h-month">${MONTHS[h.month]} ${h.year}</div>
+ <div class="h-sub">Gross Rs ${fmt(h.gross)} · Spent Rs ${fmt(h.spent)}</div>
+ </div>
+ <div class="h-net">Rs ${fmt(h.net - h.spent)}</div>
+ </div>
+ `).join('');
+ }
+ function todayDefaultDay() {
+ const now = new Date();
+ if (now.getFullYear() === state.year && now.getMonth() === state.month) return now.getDate();
+ return 1;
+ }
+ function render() {
+ if (!currentUser) return;
+ document.getElementById('content').innerHTML = `
+ <div class="tabs">
+ <button class="${view === 'salary' ? 'active' : ''}" onclick="__salaryApp.setView('salary')">Salary</button>
+ <button class="${view === 'spending' ? 'active' : ''}" onclick="__salaryApp.setView('spending')">Daily spending</button>
+ </div>
+ <div class="month-bar">
+ <button onclick="__salaryApp.shiftMonth(-1)">‹</button>
+ <div class="month-label">${MONTHS[state.month]} ${state.year}</div>
+ <button onclick="__salaryApp.shiftMonth(1)">›</button>
+ </div>
+ ${view === 'salary' ? renderSalaryView() : renderSpendingView()}
+ <div class="card" style="margin-top: 22px;">
+ <h2>History</h2>
+ <div id="historyList">${historyHtml()}</div>
+ </div>
+ `;
+ }
 
-  function flashMsg() {
-    const msg = document.getElementById('saveMsg');
-    if (msg) {
-      msg.classList.add('show');
-      setTimeout(() => msg.classList.remove('show'), 1800);
-    }
-  }
+ window.__salaryApp = {
+ async loginWithGoogle() {
+ const provider = new firebase.auth.GoogleAuthProvider();
+ try {
+ await auth.signInWithPopup(provider);
+ } catch (err) {
+ alert(friendlyAuthError(err));
+ }
+ },
+ async loginGuest() {
+ try {
+ await auth.signInAnonymously();
+ } catch (err) {
+ alert("Guest login failed: " + friendlyAuthError(err));
+ }
+ },
+ logout() { auth.signOut(); },
 
-  function renderAuthScreen() {
-    document.getElementById('content').innerHTML = `
-      <div class="auth-card">
-        <h2>Welcome to Salary Ledger</h2>
-        <p>Sign in with Google to sync across devices, or use Guest Mode for local device storage.</p>
-        <button class="auth-btn-google" onclick="__salaryApp.loginWithGoogle()">
-          <svg width="18" height="18" viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z"/></svg>
-          Continue with Google
-        </button>
-        <button class="auth-btn-guest" onclick="__salaryApp.loginGuest()">
-          Continue as Guest (Local Only)
-        </button>
-      </div>
-    `;
-  }
+ setAuthMode(mode) {
+ authMode = mode;
+ renderAuthScreen();
+ },
 
-  function renderSalaryView() {
-    const gross = sum(state.earnings);
-    const ded = sum(state.deductions);
-    const net = gross - ded;
-    return `
-      <div class="hero">
-        <div class="label" id="heroLabel">Net pay this month</div>
-        <div class="amount">Rs <span id="netAmount">${fmt(net)}</span></div>
-        <div class="sub">
-          <span>Gross <b id="grossVal">${fmt(gross)}</b></span>
-          <span>Deductions <b id="dedVal">${fmt(ded)}</b></span>
-        </div>
-      </div>
+ async submitEmailAuth() {
+ const errEl = document.getElementById('authError');
+ const okEl = document.getElementById('authSuccess');
+ const btn = document.getElementById('authSubmitBtn');
+ const email = document.getElementById('authEmail').value.trim();
+ const password = document.getElementById('authPassword').value;
 
-      <div class="card earnings">
-        <h2>Earnings <button class="add-btn" onclick="__salaryApp.add('earnings')">+ Add line</button></h2>
-        <div id="earningsRows">${rowsHtml('earnings')}</div>
-        <div class="total-row"><span>Total earnings</span><span class="val">Rs <span id="earnTotal">${fmt(gross)}</span></span></div>
-      </div>
+ errEl.classList.remove('show');
+ okEl.classList.remove('show');
 
-      <div class="card deductions">
-        <h2>Deductions <button class="add-btn" onclick="__salaryApp.add('deductions')">+ Add line</button></h2>
-        <div id="deductionsRows">${rowsHtml('deductions')}</div>
-        <div class="total-row"><span>Total deductions</span><span class="val">Rs <span id="dedTotal">${fmt(ded)}</span></span></div>
-      </div>
+ if (!email || !password) {
+ errEl.textContent = "Please fill in both email and password.";
+ errEl.classList.add('show');
+ return;
+ }
 
-      <button class="save-btn" onclick="__salaryApp.save()">Save ${MONTHS[state.month]} ${state.year}</button>
-      <div class="save-msg" id="saveMsg">Saved securely to cloud</div>
-    `;
-  }
+ btn.disabled = true;
+ const originalLabel = btn.textContent;
+ btn.textContent = authMode === 'signup' ? 'Creating account…' : 'Signing in…';
 
-  function renderSpendingView() {
-    const gross = sum(state.earnings);
-    const ded = sum(state.deductions);
-    const net = gross - ded;
-    const spent = sum(state.expenses);
-    const remaining = net - spent;
-    return `
-      <div class="hero">
-        <div class="label" id="heroLabel">Remaining after spending</div>
-        <div class="amount">Rs <span id="netAmount">${fmt(remaining)}</span></div>
-        <div class="sub">
-          <span>Net pay <b id="grossVal">${fmt(net)}</b></span>
-          <span>Spent so far <b id="dedVal">${fmt(spent)}</b></span>
-        </div>
-      </div>
+ try {
+ if (authMode === 'signup') {
+ await auth.createUserWithEmailAndPassword(email, password);
+ // onAuthStateChanged will now fire and render the app automatically
+ } else {
+ await auth.signInWithEmailAndPassword(email, password);
+ }
+ } catch (err) {
+ errEl.textContent = friendlyAuthError(err);
+ errEl.classList.add('show');
+ btn.disabled = false;
+ btn.textContent = originalLabel;
+ }
+ },
 
-      <div class="card spending">
-        <h2>Add an expense</h2>
-        <div class="expense-form">
-          <input type="number" class="day-input" id="expDay" min="1" max="${daysInMonth(state.year, state.month)}" value="${todayDefaultDay()}" placeholder="Day">
-          <input type="text" class="note-input" id="expNote" placeholder="What did you spend on?">
-          <input type="number" class="amt-input" id="expAmt" placeholder="Rs">
-          <button class="add-expense-btn" onclick="__salaryApp.addExpense()" aria-label="Add expense">+</button>
-        </div>
-      </div>
+ async resetPassword() {
+ const errEl = document.getElementById('authError');
+ const okEl = document.getElementById('authSuccess');
+ const email = document.getElementById('authEmail').value.trim();
 
-      <div class="card spending">
-        <h2>${MONTHS[state.month]} spending</h2>
-        <div id="expenseRows">${expenseRowsHtml()}</div>
-        <div class="total-row"><span>Total spent</span><span class="val">Rs <span id="spentTotal">${fmt(spent)}</span></span></div>
-      </div>
-      <div class="save-msg show" style="color: var(--text-lo);" id="remainingNote">Rs <span id="remainingVal">${fmt(remaining)}</span> left of this month's net pay</div>
-    `;
-  }
+ errEl.classList.remove('show');
+ okEl.classList.remove('show');
 
-  function rowsHtml(type) {
-    return state[type].map((item, idx) => `
-      <div class="row">
-        <input type="text" placeholder="${type === 'earnings' ? 'e.g. Basic salary' : 'e.g. Provident fund'}"
-          value="${(item.name || '').replace(/"/g,'&quot;')}"
-          oninput="__salaryApp.setName('${type}', ${idx}, this.value)">
-        <div class="amt-wrap">
-          <span>Rs</span>
-          <input type="number" inputmode="decimal" value="${item.amount || ''}" placeholder="0"
-            oninput="__salaryApp.setAmount('${type}', ${idx}, this.value)">
-        </div>
-        <button class="del" onclick="__salaryApp.remove('${type}', ${idx})" aria-label="Remove">✕</button>
-      </div>
-    `).join('');
-  }
+ if (!email) {
+ errEl.textContent = "Enter your email above first, then tap \"Forgot password?\" again.";
+ errEl.classList.add('show');
+ return;
+ }
+ try {
+ await auth.sendPasswordResetEmail(email);
+ okEl.textContent = "Password reset email sent — check your inbox.";
+ okEl.classList.add('show');
+ } catch (err) {
+ errEl.textContent = friendlyAuthError(err);
+ errEl.classList.add('show');
+ }
+ },
 
-  function expenseRowsHtml() {
-    if (!state.expenses.length) return `<div class="empty-state">No spending logged for ${MONTHS[state.month]}.</div>`;
-    return state.expenses.map((item) => `
-      <div class="expense-row">
-        <div class="day-badge">${item.day}</div>
-        <div class="note">${(item.note || 'Expense').replace(/</g,'&lt;')}</div>
-        <div class="amt">Rs ${fmt(item.amount)}</div>
-        <button class="del" onclick="__salaryApp.removeExpense('${item.id}')" aria-label="Remove">✕</button>
-      </div>
-    `).join('');
-  }
-
-  function historyHtml() {
-    if (!history.length) return `<div class="empty-state">No saved months yet.</div>`;
-    return history.map(h => `
-      <div class="history-item" onclick="__salaryApp.goTo(${h.year}, ${h.month})">
-        <div class="h-left">
-          <div class="h-month">${MONTHS[h.month]} ${h.year}</div>
-          <div class="h-sub">Gross Rs ${fmt(h.gross)} · Spent Rs ${fmt(h.spent)}</div>
-        </div>
-        <div class="h-net">Rs ${fmt(h.net - h.spent)}</div>
-      </div>
-    `).join('');
-  }
-
-  function todayDefaultDay() {
-    const now = new Date();
-    if (now.getFullYear() === state.year && now.getMonth() === state.month) return now.getDate();
-    return 1;
-  }
-
-  function render() {
-    if (!currentUser) return;
-    document.getElementById('content').innerHTML = `
-      <div class="tabs">
-        <button class="${view === 'salary' ? 'active' : ''}" onclick="__salaryApp.setView('salary')">Salary</button>
-        <button class="${view === 'spending' ? 'active' : ''}" onclick="__salaryApp.setView('spending')">Daily spending</button>
-      </div>
-
-      <div class="month-bar">
-        <button onclick="__salaryApp.shiftMonth(-1)">‹</button>
-        <div class="month-label">${MONTHS[state.month]} ${state.year}</div>
-        <button onclick="__salaryApp.shiftMonth(1)">›</button>
-      </div>
-
-      ${view === 'salary' ? renderSalaryView() : renderSpendingView()}
-
-      <div class="card" style="margin-top: 22px;">
-        <h2>History</h2>
-        <div id="historyList">${historyHtml()}</div>
-      </div>
-    `;
-  }
-
-  window.__salaryApp = {
-    async loginWithGoogle() {
-      const provider = new firebase.auth.GoogleAuthProvider();
-      try {
-        await auth.signInWithPopup(provider);
-      } catch (err) {
-        alert(err.message);
-      }
-    },
-    async loginGuest() {
-      try {
-        await auth.signInAnonymously();
-      } catch (err) {
-        alert("Guest login failed: " + err.message);
-      }
-    },
-    logout() { auth.signOut(); },
-    setName(type, idx, val) { state[type][idx].name = val; },
-    setAmount(type, idx, val) { state[type][idx].amount = val === '' ? 0 : parseFloat(val); },
-    add(type) { state[type].push({ name: "", amount: 0 }); render(); },
-    remove(type, idx) { state[type].splice(idx, 1); render(); },
-    save() { saveSalary(); },
-    setView(v) { view = v; render(); },
-    addExpense() {
-      const dayEl = document.getElementById('expDay');
-      const noteEl = document.getElementById('expNote');
-      const amtEl = document.getElementById('expAmt');
-      const day = Math.min(Math.max(parseInt(dayEl.value) || todayDefaultDay(), 1), daysInMonth(state.year, state.month));
-      const note = noteEl.value.trim();
-      const amount = parseFloat(amtEl.value) || 0;
-      if (amount <= 0) return;
-      state.expenses.push({ id: Date.now() + '-' + Math.random().toString(36).slice(2,7), day, note, amount });
-      state.expenses.sort((a,b) => a.day - b.day);
-      saveExpenses();
-    },
-    removeExpense(id) {
-      state.expenses = state.expenses.filter(e => e.id !== id);
-      saveExpenses();
-    },
-    shiftMonth(dir) {
-      let m = state.month + dir, y = state.year;
-      if (m < 0) { m = 11; y -= 1; }
-      if (m > 11) { m = 0; y += 1; }
-      state.month = m; state.year = y;
-      listenToMonth(y, m);
-    },
-    goTo(year, month) {
-      state.year = year; state.month = month;
-      listenToMonth(year, month);
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    }
-  };
+ setName(type, idx, val) { state[type][idx].name = val; },
+ setAmount(type, idx, val) { state[type][idx].amount = val === '' ? 0 : parseFloat(val); },
+ add(type) { state[type].push({ name: "", amount: 0 }); render(); },
+ remove(type, idx) { state[type].splice(idx, 1); render(); },
+ save() { saveSalary(); },
+ setView(v) { view = v; render(); },
+ addExpense() {
+ const dayEl = document.getElementById('expDay');
+ const noteEl = document.getElementById('expNote');
+ const amtEl = document.getElementById('expAmt');
+ const day = Math.min(Math.max(parseInt(dayEl.value) || todayDefaultDay(), 1), daysInMonth(state.year, state.month));
+ const note = noteEl.value.trim();
+ const amount = parseFloat(amtEl.value) || 0;
+ if (amount <= 0) return;
+ state.expenses.push({ id: Date.now() + '-' + Math.random().toString(36).slice(2,7), day, note, amount });
+ state.expenses.sort((a,b) => a.day - b.day);
+ saveExpenses();
+ },
+ removeExpense(id) {
+ state.expenses = state.expenses.filter(e => e.id !== id);
+ saveExpenses();
+ },
+ shiftMonth(dir) {
+ let m = state.month + dir, y = state.year;
+ if (m < 0) { m = 11; y -= 1; }
+ if (m > 11) { m = 0; y += 1; }
+ state.month = m; state.year = y;
+ listenToMonth(y, m);
+ },
+ goTo(year, month) {
+ state.year = year; state.month = month;
+ listenToMonth(year, month);
+ window.scrollTo({ top: 0, behavior: 'smooth' });
+ }
+ };
 })();
-
 if ('serviceWorker' in navigator) {
-  window.addEventListener('load', () => {
-    navigator.serviceWorker.register('sw.js').catch(() => {});
-  });
+ window.addEventListener('load', () => {
+ navigator.serviceWorker.register('sw.js').catch(() => {});
+ });
 }
 </script>
 </body>
